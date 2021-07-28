@@ -3,26 +3,40 @@ import {Col, Row} from "react-bootstrap";
 import registerOnline from '../../../images/regi-online.svg'
 import getSms from '../../../images/get-sms.svg'
 import hospital from '../../../images/hospital.svg'
+import './Section2.css'
 
 const Section2 = () => {
     return (
-        <div className="my-5">
-            <div className="d-flex justify-content-center my-5">
-                <h3>How to Get Vaccine</h3>
+        <div className="my-5" style={{border: '1x solid black'}}>
+            <div className="d-flex justify-content-center my-5  card-border">
+                <h2>How to Get Vaccine</h2>
             </div>
-            <div className="d-flex justify-content-sm-center">
-                <Row lg={3} xs={1}>
-                    <Col>
-                        <img className="w-50 mb-4" style={{marginLeft: '-40px'}} src={registerOnline}/>
-                        <h5>Register Online</h5>
+            <div className="m-4">
+                <Row lg={4} xs={1} className="d-flex justify-content-center">
+                    <Col className="card-border mb-3 card-sp">
+                        <div className="d-flex justify-content-center">
+                            <img className="w-50 mb-4" src={registerOnline}/>
+                        </div>
+
+                        <div className="d-flex justify-content-center">
+                            <h5>Register Online</h5>
+                        </div>
                     </Col>
-                    <Col>
-                        <img className="w-50 mb-4" src={getSms}/>
-                        <h5>Get SMS</h5>
+                    <Col className="card-border mb-3 card-sp">
+                        <div className="d-flex justify-content-center">
+                            <img className="w-50 mb-4" src={getSms}/>
+                        </div>
+                        <div className="d-flex justify-content-center">
+                            <h5>Get SMS</h5>
+                        </div>
                     </Col>
-                    <Col>
-                        <img className="w-50 mb-4" src={hospital}/>
-                        <h5>Go To Vaccine Center</h5>
+                    <Col className="card-border mb-3 card-sp">
+                        <div className="d-flex justify-content-center">
+                            <img className="w-50 mb-4" src={hospital}/>
+                        </div>
+                        <div className="d-flex justify-content-center">
+                            <h5>Go To Vaccine Center</h5>
+                        </div>
                     </Col>
                 </Row>
 

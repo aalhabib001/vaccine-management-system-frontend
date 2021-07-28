@@ -3,7 +3,7 @@ import cardDownload from '../../images/card-download.svg'
 import checkStatus from '../../images/check-status.svg'
 import certificate from '../../images/certificate.svg'
 
-export const homeCardDataList = [
+export const homeCardDataList1 = [
     {
         title: "Register For Vaccine",
         link: "/enroll",
@@ -23,9 +23,10 @@ export const homeCardDataList = [
         logo: checkStatus
     },
     {
-        title: "Download Vaccine Certificate Here",
+        title: "Download Vaccine Certificate",
         link: "/certificate",
         subTitle: "Download Vaccine certificate from here",
         logo: certificate
     },
 ]
+

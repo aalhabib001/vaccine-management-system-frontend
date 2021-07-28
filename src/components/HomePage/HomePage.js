@@ -2,7 +2,7 @@ import React from 'react';
 import './HomePage.css'
 import {Col, Container, Row} from "react-bootstrap";
 import TextCard from "./TextCard/TextCard";
-import {homeCardDataList} from "./HomeCardData";
+import {homeCardDataList, homeCardDataList1} from "./HomeCardData";
 import Section2 from "./Section2/Section2";
 
 const HomePage = () => {
@@ -12,12 +12,10 @@ const HomePage = () => {
                 <div className="su-main-banner-area">
 
                     <Container>
-                        <Row lg={2} className="d-flex justify-content-lg-around">
-
+                        <Row lg={2} className="p-5">
                             {
-                                homeCardDataList.map(homeCardData => <Col><TextCard cardData={homeCardData}/></Col>)
+                                homeCardDataList1.map(homeCardData => <Col className="d-flex justify-content-center"><TextCard cardData={homeCardData}/></Col>)
                             }
-
                         </Row>
                     </Container>
                 </div>
