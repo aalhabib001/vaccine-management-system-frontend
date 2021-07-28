@@ -10,10 +10,10 @@ const Section2 = () => {
             <div className="d-flex justify-content-center my-5">
                 <h3>How to Get Vaccine</h3>
             </div>
-            <div className="d-flex justify-content-center">
-                <Row>
+            <div className="d-flex justify-content-sm-center">
+                <Row lg={3} xs={1}>
                     <Col>
-                        <img className="w-50 mb-4" src={registerOnline}/>
+                        <img className="w-50 mb-4" style={{marginLeft: '-40px'}} src={registerOnline}/>
                         <h5>Register Online</h5>
                     </Col>
                     <Col>
@@ -25,6 +25,7 @@ const Section2 = () => {
                         <h5>Go To Vaccine Center</h5>
                     </Col>
                 </Row>
+
             </div>
 
         </div>

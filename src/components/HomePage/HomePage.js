@@ -12,7 +12,7 @@ const HomePage = () => {
                 <div className="su-main-banner-area">
 
                     <Container>
-                        <Row lg={2} className="d-flex justify-content-lg-around p-5 ms-5">
+                        <Row lg={2} className="d-flex justify-content-lg-around">
 
                             {
                                 homeCardDataList.map(homeCardData => <Col><TextCard cardData={homeCardData}/></Col>)
