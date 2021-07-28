@@ -7,3 +7,9 @@
     font-family: 'Lobster', cursive;
     font-size: 30px;
 }
+
+@media (max-width: 600px) {
+    .header-logo {
+        font-size: 22px;
+    }
+}
