@@ -1,0 +1,7 @@
+.su-main-banner-area {
+    display: block;
+    background-image: url('../../images/vc3.jpg');
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
