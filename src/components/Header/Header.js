@@ -19,29 +19,29 @@ const Header = () => {
                     <Nav className="align-items-center">
 
                         <Link
-                            style={{fontSize: '19px'}} to="/dashoboard/orders"
+                            style={{fontSize: '19px'}} to="/enroll"
                             className="nav-link active text-dark mr-3">
                             Enroll
                         </Link>
                         <Link
-                            style={{fontSize: '19px'}} to="/dashoboard/orders"
+                            style={{fontSize: '19px'}} to="/vaccine-card"
                             className="nav-link active text-dark mr-3">
                             Vaccine Card
                         </Link>
                         <Link
-                            style={{fontSize: '19px'}} to="/dashoboard/orders"
+                            style={{fontSize: '19px'}} to="/certificate"
                             className="nav-link active text-dark mr-3">
                             Certificate
                         </Link>
                         <Link
-                            style={{fontSize: '19px'}} to="/dashoboard/orders"
+                            style={{fontSize: '19px'}} to="/status"
                             className="nav-link active text-dark mr-3">
                             Status
                         </Link>
                         <Link
-                            style={{fontSize: '19px'}} to="/dashoboard/orders"
+                            style={{fontSize: '19px'}} to="/login"
                             className="nav-link active text-dark mr-3">
-                            <button className="btn btn-success">Admin Login</button>
+                            <button className="btn btn-primary">Admin Login</button>
                         </Link>
                     </Nav>
                 </Navbar.Collapse>

@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import HomePage from "./components/HomePage/HomePage";
+import Enroll from "./components/Enroll/Enroll";
 
 function App() {
     return (
@@ -14,8 +15,8 @@ function App() {
                     <Route exact path="/">
                         <HomePage/>
                     </Route>
-                    <Route path="/about">
-                        {/*<About/>*/}
+                    <Route path="/enroll">
+                        <Enroll/>
                     </Route>
                     <Route path="/users">
                         {/*<Users/>*/}

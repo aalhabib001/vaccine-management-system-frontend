@@ -1,0 +1,10 @@
+
+.form-input {
+    margin: 10px 20% 10px 0px;
+}
+
+@media (max-width: 600px) {
+    .form-input {
+        margin: 10px 0px 10px 0px;
+    }
+}
