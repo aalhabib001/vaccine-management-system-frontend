@@ -17,7 +17,11 @@ const Header = () => {
 
                     </Nav>
                     <Nav className="align-items-center">
-
+                        <Link
+                            style={{fontSize: '19px'}} to="/"
+                            className="nav-link active text-dark mr-3">
+                            Home
+                        </Link>
                         <Link
                             style={{fontSize: '19px'}} to="/enroll"
                             className="nav-link active text-dark mr-3">
