@@ -6,6 +6,8 @@ import Footer from "./components/Footer/Footer";
 import HomePage from "./components/HomePage/HomePage";
 import Enroll from "./components/Enroll/Enroll";
 import VaccineCard from "./components/VaccineCard/VaccineCard";
+import Certificate from "./components/Certificate/Certificate";
+import VaccineStatus from "./components/VaccineStatus/VaccineStatus";
 
 function App() {
     return (
@@ -22,8 +24,11 @@ function App() {
                     <Route path="/vaccine-card">
                         <VaccineCard/>
                     </Route>
-                    <Route path="/">
-                        {/*<Home/>*/}
+                    <Route path="/certificate">
+                        <Certificate/>
+                    </Route>
+                    <Route path="/status">
+                        <VaccineStatus/>
                     </Route>
                 </Switch>
                 <Footer/>
