@@ -2,12 +2,12 @@ import React from 'react';
 import {Container, Form} from "react-bootstrap";
 
 const NidPhoneStep = (props) => {
-    const handleOnBlur = props.handleOnBlur;
+    const {handleOnBlur} = props;
 
     return (
         <Container>
             <div className="form-2">
-                <Form className="mb-4">
+                <div className="mb-4">
                     <div className="form-input-2">
                         <Form.Group controlId="National ID No">
                             <Form.Label>National ID No</Form.Label>
@@ -24,7 +24,7 @@ const NidPhoneStep = (props) => {
                                           required/>
                         </Form.Group>
                     </div>
-                </Form>
+                </div>
             </div>
         </Container>
     );

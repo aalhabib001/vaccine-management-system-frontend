@@ -36,6 +36,8 @@ export default function StatusStepper() {
     }
 
     const handleNext = () => {
+        console.log(activeStep)
+
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
