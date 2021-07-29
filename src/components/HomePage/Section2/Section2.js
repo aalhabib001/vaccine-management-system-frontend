@@ -15,7 +15,7 @@ const Section2 = () => {
                 <Row lg={4} xs={1} className="d-flex justify-content-center">
                     <Col className="card-border mb-3 card-sp">
                         <div className="d-flex justify-content-center">
-                            <img className="w-50 mb-4" src={registerOnline}/>
+                            <img className="w-50 mb-4" src={registerOnline} alt=""/>
                         </div>
 
                         <div className="d-flex justify-content-center">
@@ -24,7 +24,7 @@ const Section2 = () => {
                     </Col>
                     <Col className="card-border mb-3 card-sp">
                         <div className="d-flex justify-content-center">
-                            <img className="w-50 mb-4" src={getSms}/>
+                            <img className="w-50 mb-4" src={getSms} alt=""/>
                         </div>
                         <div className="d-flex justify-content-center">
                             <h5>Get SMS</h5>
@@ -32,7 +32,7 @@ const Section2 = () => {
                     </Col>
                     <Col className="card-border mb-3 card-sp">
                         <div className="d-flex justify-content-center">
-                            <img className="w-50 mb-4" src={hospital}/>
+                            <img className="w-50 mb-4" src={hospital} alt=""/>
                         </div>
                         <div className="d-flex justify-content-center">
                             <h5>Go To Vaccine Center</h5>

@@ -1,6 +1,5 @@
 import React from 'react';
 import VerticalLinearStepper from "./Stepper/VerticalLinearStepper";
-import {Container} from "react-bootstrap";
 import './Stepper/Stepper.css'
 
 const Enroll = () => {
@@ -18,3 +17,4 @@ const Enroll = () => {
 };
 
 export default Enroll;
+

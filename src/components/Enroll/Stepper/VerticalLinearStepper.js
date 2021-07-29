@@ -7,8 +7,6 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import {Snackbar} from "@material-ui/core";
-import {Alert} from "bootstrap";
 import {Container, Form} from "react-bootstrap";
 import './Stepper.css'
 
@@ -37,8 +35,6 @@ export default function VerticalLinearStepper() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
-    const [open, setOpen] = React.useState(false);
-
 
     const handleOnBlur = (event) => {
         console.log(event.target.value);

@@ -5,6 +5,7 @@
 
 .stepper-mg {
     margin-left: 5%;
+    margin-right: 10%;
 }
 
 @media (max-width: 600px) {
@@ -14,5 +15,6 @@
 
     .stepper-mg {
         margin-left: 0;
+        margin-right: 0;
     }
 }

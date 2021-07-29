@@ -2,7 +2,7 @@ import React from 'react';
 import './HomePage.css'
 import {Col, Container, Row} from "react-bootstrap";
 import TextCard from "./TextCard/TextCard";
-import {homeCardDataList, homeCardDataList1} from "./HomeCardData";
+import {homeCardDataList1} from "./HomeCardData";
 import Section2 from "./Section2/Section2";
 
 const HomePage = () => {
@@ -14,7 +14,9 @@ const HomePage = () => {
                     <Container>
                         <Row lg={2} className="p-5">
                             {
-                                homeCardDataList1.map(homeCardData => <Col className="d-flex justify-content-center"><TextCard cardData={homeCardData}/></Col>)
+                                homeCardDataList1.map(homeCardData => <Col className="d-flex justify-content-center">
+                                    <TextCard cardData={homeCardData} key={homeCardData.title}/>
+                                </Col>)
                             }
                         </Row>
                     </Container>

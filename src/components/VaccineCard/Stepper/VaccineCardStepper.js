@@ -3,12 +3,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import {Snackbar} from "@material-ui/core";
-import {Alert} from "bootstrap";
 import {Container, Form} from "react-bootstrap";
 import './Stepper.css'
 
@@ -28,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 function getSteps() {
     return ['Verify NID and Phone No', 'Download Card'];
 }
@@ -37,8 +34,6 @@ export default function VaccineCardStepper() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
-    const [open, setOpen] = React.useState(false);
-
 
     const handleOnBlur = (event) => {
         console.log(event.target.value);
@@ -53,9 +48,9 @@ export default function VaccineCardStepper() {
             case 0:
                 return (
                     <Container>
-                        <div className="d-flex justify-content-center">
-                            <Form>
-                                <div className="form-input">
+                        <div className="form-2">
+                            <Form className="mb-4">
+                                <div className="form-input-2">
                                     <Form.Group controlId="National ID No">
                                         <Form.Label>National ID No</Form.Label>
                                         <Form.Control onBlur={handleOnBlur} type="text"
@@ -63,7 +58,7 @@ export default function VaccineCardStepper() {
                                                       required/>
                                     </Form.Group>
                                 </div>
-                                <div className="form-input">
+                                <div className="form-input-2">
                                     <Form.Group controlId="Phone No">
                                         <Form.Label>Phone No</Form.Label>
                                         <Form.Control onBlur={handleOnBlur} type="text"
@@ -79,8 +74,8 @@ export default function VaccineCardStepper() {
                 return (
                     <Container>
                         <div className="d-flex justify-content-center">
-                            <div className="form-input">
-                                <button className="btn btn-primary">Download Vaccine Card</button>
+                            <div className="form-input-2">
+                                <button className="btn btn-primary mb-4">Download Vaccine Card</button>
                             </div>
                         </div>
 
@@ -116,7 +111,7 @@ export default function VaccineCardStepper() {
                     </Step>
                 ))}
             </Stepper>
-            <div>
+            <div className="mb-5">
                 {activeStep === steps.length ? (
                     <div>
                         <Typography className={classes.instructions}>All steps completed</Typography>
@@ -124,6 +119,7 @@ export default function VaccineCardStepper() {
                     </div>
                 ) : (
                     <div>
+
                         <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
                         <div>
                             <Button

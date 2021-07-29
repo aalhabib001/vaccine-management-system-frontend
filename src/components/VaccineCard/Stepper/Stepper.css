@@ -1,18 +1,27 @@
 
-.form-input {
-    margin: 10px 20% 10px 0;
+.form-input-2 {
+    margin: 0 0 0 0;
 }
 
-.stepper-mg {
-    margin-left: 5%;
+.form-2 {
+    margin: 0 20%;
+}
+
+.vc-1{
+
 }
 
 @media (max-width: 600px) {
-    .form-input {
-        margin: 10px 0 10px 0;
+    .form-input-2 {
+        margin-bottom: 10px;
     }
 
-    .stepper-mg {
-        margin-left: 0;
+    .form-2 {
+        margin: 0 0;
+    }
+
+    .vc-1{
+        margin-top: 10%;
+        margin-bottom: 10%;
     }
 }
