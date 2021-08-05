@@ -1,9 +1,10 @@
 import React from 'react';
 import './HomePage.css'
-import {Col, Container, Row} from "react-bootstrap";
+import {Card, Col, Container, Row} from "react-bootstrap";
 import TextCard from "./TextCard/TextCard";
 import {homeCardDataList1} from "./HomeCardData";
 import Section2 from "./Section2/Section2";
+import InfoCard from "./InfoCard/InfoCard";
 
 const HomePage = () => {
     return (
@@ -21,6 +22,7 @@ const HomePage = () => {
                         </Row>
                     </Container>
                 </div>
+                <InfoCard/>
                 <Container>
                     <Section2/>
 

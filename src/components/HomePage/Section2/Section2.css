@@ -1,4 +1,18 @@
 
+.su-main-banner-area-2 {
+    display: block;
+    background-image: url('../../../images/header-bg.png');
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
+
+.card-border-header {
+    border-bottom: 6px solid;
+    border-image: linear-gradient(90deg, blue, #19ac07);
+    border-image-slice: 1;
+}
+
 .card-border {
     border: 2px dashed royalblue;
     padding: 20px;

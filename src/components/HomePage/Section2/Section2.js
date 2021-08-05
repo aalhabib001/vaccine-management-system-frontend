@@ -7,10 +7,13 @@ import './Section2.css'
 
 const Section2 = () => {
     return (
-        <div className="my-5" style={{border: '1x solid black'}}>
-            <div className="d-flex justify-content-center my-5  card-border">
-                <h2>How to Get Vaccine</h2>
+        <div className="mb-5 su-main-banner-area-2" style={{border: '1x solid black'}}>
+            <div className="header-top d-flex justify-content-center">
+                <div className="d-flex justify-content-center my-5 card-border-header">
+                    <h2>How to Get Vaccine</h2>
+                </div>
             </div>
+
             <div className="m-4">
                 <Row lg={4} xs={1} className="d-flex justify-content-center">
                     <Col className="card-border mb-3 card-sp">

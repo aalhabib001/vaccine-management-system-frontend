@@ -1,0 +1,46 @@
+.card-style-2 {
+    margin-top: -45px;
+}
+
+.card-div {
+    display: flex;
+}
+
+.card {
+    /*width: 21rem;*/
+    border-radius: 15px;
+    border: 3px solid royalblue;
+}
+
+.vl {
+    border-left: 3px solid royalblue;
+    /*height: 500px;*/
+}
+
+.individual-data {
+
+}
+
+@media (max-width: 600px) {
+    .card-style-2 {
+        margin-top: 5%;
+        width: 90%;
+    }
+
+    .vl {
+
+    }
+
+    .individual-data {
+        margin: 7% 0;
+    }
+
+    /*.main-div {*/
+    /*    width: 100%;*/
+    /*}*/
+
+    .card-div {
+        display: block;
+
+    }
+}

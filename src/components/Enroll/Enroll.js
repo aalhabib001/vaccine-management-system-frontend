@@ -4,7 +4,7 @@ import './Stepper/Stepper.css'
 
 const Enroll = () => {
     return (
-        <div className="container-lg">
+        <div className="container-lg su-main-banner-area-2">
             <div className="d-flex justify-content-center m-5">
                 <h3>Register Vaccine Here</h3>
             </div>

@@ -8,7 +8,9 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import {Container, Form} from "react-bootstrap";
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import './Stepper.css'
+import {TextField} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,81 +40,122 @@ export default function VerticalLinearStepper() {
 
     const handleOnBlur = (event) => {
         console.log(event.target.value);
+        console.log(event.target.id);
         // const newServiceTemp = {...newService}
         // newServiceTemp[event.target.id] = event.target.value
         // setNewService(newServiceTemp)
     }
+
+    const top100Films = [
+        {title: 'Bangabandhu Sheikh Mujib Medical University Hospital'},
+        {title: 'Dhaka Medical College and Hospital'},
+        {title: 'Combined Military Hospital (CMH)'},
+        {title: 'Kurmitola General Hospital'},
+        {title: 'Kuwait Bangladesh Friendship Government Hospital'},
+        {title: "Shaheed Suhrawardy Medical College and Hospital"}
+    ];
 
     function getStepContent(step) {
 
         switch (step) {
             case 0:
                 return (
-                    <Container>
+                    <Container className="su-main-banner-area-3">
                         <Form>
                             <div className="form-input">
-                                <Form.Group controlId="National ID No">
-                                    <Form.Label>National ID No</Form.Label>
-                                    <Form.Control onBlur={handleOnBlur} type="text"
-                                                  placeholder="Enter Your National ID No"
-                                                  required/>
-                                </Form.Group>
+                                <TextField
+                                    id="national-id-no"
+                                    label="National Id No"
+                                    margin="normal"
+                                    variant="standard"
+                                    type="number"
+                                    onBlur={handleOnBlur}
+                                />
                             </div>
                             <div className="form-input">
-                                <Form.Group controlId="Phone No">
-                                    <Form.Label>Phone No</Form.Label>
-                                    <Form.Control onBlur={handleOnBlur} type="text" placeholder="Enter Your Phone No"
-                                                  required/>
-                                </Form.Group>
+                                <TextField
+                                    id="phone-no"
+                                    label="Phone No"
+                                    margin="normal"
+                                    variant="standard"
+                                    type="number"
+                                    onBlur={handleOnBlur}
+                                />
                             </div>
                         </Form>
                     </Container>
                 );
             case 1:
                 return (
-                    <Container>
+                    <Container className="su-main-banner-area-3">
                         <Form>
                             <div className="form-input">
-                                <Form.Group controlId="Full Name">
-                                    <Form.Label>Full Name</Form.Label>
-                                    <Form.Control onBlur={handleOnBlur} type="text" placeholder="Enter Your Full Name"
-                                                  required/>
-                                </Form.Group>
+                                <TextField
+                                    id="full-name"
+                                    label="Full Name"
+                                    margin="normal"
+                                    variant="standard"
+                                    onBlur={handleOnBlur}
+                                />
                             </div>
                             <div className="form-input">
-                                <Form.Group controlId="Date of Birth">
-                                    <Form.Label>Date of Birth</Form.Label>
-                                    <Form.Control onBlur={handleOnBlur} type="date"
-                                                  required/>
-                                </Form.Group>
+                                <Autocomplete
+                                    freeSolo
+                                    disableClearable
+                                    id="vaccine-center"
+                                    options={top100Films.map((option) => option.title)}
+                                    renderInput={(params) => (
+                                        <TextField
+                                            {...params}
+                                            label="Vaccine Center"
+                                            margin="normal"
+                                            variant="standard"
+                                            onBlur={handleOnBlur}
+                                            InputProps={{...params.InputProps, type: 'search'}}
+                                        />
+                                    )}
+                                />
                             </div>
                             <div className="form-input">
-                                <Form.Group controlId="Vaccine Center Name">
-                                    <Form.Label>Vaccine Center Name</Form.Label>
-                                    <Form.Control onBlur={handleOnBlur} type="text"
-                                                  placeholder="Enter Vaccine Center Name"
-                                                  required/>
-                                </Form.Group>
+                                <TextField
+                                    id="date-of-birth"
+                                    label="Date Of Birth"
+                                    margin="normal"
+                                    variant="standard"
+                                    type="date"
+                                    defaultValue="2017-05-24"
+                                    onBlur={handleOnBlur}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
                             </div>
                             <div className="form-input">
-                                <Form.Group controlId="Address">
-                                    <Form.Label>Address</Form.Label>
-                                    <Form.Control onBlur={handleOnBlur} as="textarea" rows={4}/>
-                                </Form.Group>
+                                <TextField
+                                    id="address"
+                                    label="Address"
+                                    margin="normal"
+                                    variant="standard"
+                                    onBlur={handleOnBlur}
+                                    multiline
+                                    rows={4}
+                                />
                             </div>
                         </Form>
                     </Container>
                 );
             case 2:
                 return (
-                    <Container>
+                    <Container className="su-main-banner-area-3">
                         <div className="form-input">
-                            <Form.Group controlId="OTP">
-                                <Form.Label>OTP</Form.Label>
-                                <Form.Control onBlur={handleOnBlur} type="text"
-                                              placeholder="Enter OTP from your Phone"
-                                              required/>
-                            </Form.Group>
+                            <TextField
+                                id="otp"
+                                label="OTP"
+                                margin="normal"
+                                variant="standard"
+                                type="number"
+                                onBlur={handleOnBlur}
+                            />
                         </div>
                         <div className="form-input">
                             <Form.Group controlId="I Agree CheckBox">

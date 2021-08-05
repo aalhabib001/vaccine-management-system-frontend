@@ -1,10 +1,12 @@
 import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import uuLogo from '../../images/uu-logo.png'
+import './Footer.css'
 
 const Footer = () => {
     return (
-        <div style={{backgroundColor: '#F8F9FA'}}>
+        // <div style={{backgroundColor: '#F8F9FA'}}>
+        <div className="su-main-banner-area-3">
             <Container>
                 {/*<div style={{marginLeft: '10rem', marginRight: '10rem', paddingBottom: '2rem', paddingTop: '2rem'}}>*/}
                 <Row className=" align-items-center pt-3" lg={3} xs={1}>

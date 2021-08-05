@@ -8,7 +8,7 @@ const TextCard = (props) => {
 
     return (
         <Link to={cardData.link} style={{textDecoration: 'none'}}>
-            <Card className="mb-5 card-style">
+            <Card className="mb-5 card-style Small shadow">
                 <Card.Body>
                     <div className="d-flex justify-content-center mb-3">
                         <img src={cardData.logo} alt="logo" className="w-25"/>

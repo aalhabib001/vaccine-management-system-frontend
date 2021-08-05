@@ -13,7 +13,7 @@ export const homeCardDataList1 = [
     {
         title: "Download Vaccine Card",
         link: "/vaccine-card",
-        subTitle: "Download Vaccine card here",
+        subTitle: "Download Your Vaccine card from here",
         logo: cardDownload
     },
     {
