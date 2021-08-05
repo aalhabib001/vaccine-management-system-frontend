@@ -46,8 +46,8 @@ const AdminDashboard = () => {
                                 onBlur={handleOnBlur}
                             />
                         </th>
-                        <th/>
-                        <th/>
+                        {/*<th/>*/}
+                        {/*<th/>*/}
                     </tr>
                     </thead>
                     <tbody>
