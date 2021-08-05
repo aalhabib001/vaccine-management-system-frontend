@@ -123,7 +123,7 @@ export default function VerticalLinearStepper() {
                                     margin="normal"
                                     variant="standard"
                                     type="date"
-                                    defaultValue="2017-05-24"
+                                    defaultValue="0000-00-00"
                                     onBlur={handleOnBlur}
                                     InputLabelProps={{
                                         shrink: true,
@@ -147,21 +147,23 @@ export default function VerticalLinearStepper() {
             case 2:
                 return (
                     <Container className="su-main-banner-area-3">
-                        <div className="form-input">
-                            <TextField
-                                id="otp"
-                                label="OTP"
-                                margin="normal"
-                                variant="standard"
-                                type="number"
-                                onBlur={handleOnBlur}
-                            />
-                        </div>
-                        <div className="form-input">
-                            <Form.Group controlId="I Agree CheckBox">
-                                <Form.Check type="checkbox" label="I Agree the terms and conditions"/>
-                            </Form.Group>
-                        </div>
+                        <Form>
+                            <div className="form-input">
+                                <TextField
+                                    id="otp"
+                                    label="OTP"
+                                    margin="normal"
+                                    variant="standard"
+                                    type="number"
+                                    onBlur={handleOnBlur}
+                                />
+                            </div>
+                            <div className="form-input">
+                                <Form.Group controlId="I Agree CheckBox">
+                                    <Form.Check type="checkbox" label="I Agree the terms and conditions"/>
+                                </Form.Group>
+                            </div>
+                        </Form>
                     </Container>
                 );
             default:

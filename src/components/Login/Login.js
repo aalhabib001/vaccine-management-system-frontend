@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Form} from "react-bootstrap";
 // import {UserContext} from "../../App";
 import './Login.css'
+import {Link} from "react-router-dom";
 
 const Login = () => {
 
@@ -44,9 +45,11 @@ const Login = () => {
 
                         </div>
                         <div className="form-input-3">
-                            <Button className="w-100 mb-3" variant="primary" type="submit">
-                                Login
-                            </Button>
+
+                            <Link to="/admin">
+                                <Button className="w-100 mb-3" variant="primary" type="submit">Login</Button>
+                            </Link>
+
 
                         </div>
                         {/*<div className="d-flex justify-content-start">*/}

@@ -1,6 +1,6 @@
 import React from 'react';
 import './HomePage.css'
-import {Card, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import TextCard from "./TextCard/TextCard";
 import {homeCardDataList1} from "./HomeCardData";
 import Section2 from "./Section2/Section2";
@@ -15,7 +15,8 @@ const HomePage = () => {
                     <Container>
                         <Row lg={2} className="p-5">
                             {
-                                homeCardDataList1.map(homeCardData => <Col className="d-flex justify-content-center">
+                                homeCardDataList1.map(homeCardData => <Col className="d-flex justify-content-center"
+                                                                           key={homeCardData.title}>
                                     <TextCard cardData={homeCardData} key={homeCardData.title}/>
                                 </Col>)
                             }

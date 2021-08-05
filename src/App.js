@@ -9,6 +9,7 @@ import VaccineCard from "./components/VaccineCard/VaccineCard";
 import Certificate from "./components/Certificate/Certificate";
 import VaccineStatus from "./components/VaccineStatus/VaccineStatus";
 import Login from "./components/Login/Login";
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 
 function App() {
     return (
@@ -33,6 +34,9 @@ function App() {
                     </Route>
                     <Route path="/login">
                         <Login/>
+                    </Route>
+                    <Route path="/admin">
+                        <AdminDashboard/>
                     </Route>
                 </Switch>
                 <Footer/>
