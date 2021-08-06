@@ -3,13 +3,22 @@
     text-decoration: none;
 }
 
-.header-logo {
-    font-family: 'Lobster', cursive;
-    font-size: 30px;
+/*.header-logo {*/
+/*    font-family: 'Lobster', cursive;*/
+/*    font-size: 30px;*/
+/*}*/
+
+.logo-div-2 {
+    padding: 0;
+}
+
+.header-logo-img {
+    height: 65px;
+    /*width: 20%;*/
 }
 
 @media (max-width: 600px) {
-    .header-logo {
-        font-size: 22px;
-    }
+    /*.header-logo {*/
+    /*    font-size: 22px;*/
+    /*}*/
 }

@@ -8,8 +8,8 @@ import InfoCard from "./InfoCard/InfoCard";
 
 const HomePage = () => {
     return (
-        <div>
-            <div className="">
+        <div className="">
+            <div>
                 <div className="su-main-banner-area">
 
                     <Container>

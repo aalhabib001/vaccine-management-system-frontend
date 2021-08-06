@@ -2,14 +2,18 @@ import React from 'react';
 import {Container, Nav, Navbar} from "react-bootstrap";
 import './Header.css'
 import {Link} from "react-router-dom";
+// import logo from "../../images/LOGO.png"
+import logo from "../../images/logo-2.png"
 
 const Header = () => {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="sticky-top">
             <Container>
                 <Link to="/"
-                      className="nav-link active text-dark mr-3">
-                    <Navbar.Brand href="#home" className="header-logo">Vaccine Distribution System</Navbar.Brand>
+                      className="nav-link active text-dark logo-div-2">
+                    {/*<Navbar.Brand href="#home" className="header-logo">Vaccine Distribution System</Navbar.Brand>*/}
+                    <Navbar.Brand href="#home" className="header-logo"><img className="header-logo-img" src={logo}/>
+                    </Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
