@@ -1,11 +1,10 @@
 import React from 'react';
-import './VaccineCardDownload.css'
+import bdGovt from "../../images/bd-govt.png";
+import uuLogo from "../../images/uu-logo.png";
+import siteLogo from "../../images/LOGO.png";
 import {Button, Container} from "react-bootstrap";
-import uuLogo from "../../images/uu-logo.png"
-import bdGovt from "../../images/bd-govt.png"
-import siteLogo from '../../images/LOGO.png'
 
-const VaccineCardDownload = () => {
+const CertificateDownload = () => {
     return (
         <Container>
 
@@ -18,7 +17,7 @@ const VaccineCardDownload = () => {
                         <div className="mt-3" style={{width: '70%'}}>
                             <h4 className="d-flex justify-content-center">Govt Of The People's Republic Of
                                 Bangladesh</h4>
-                            <h5 className="d-flex justify-content-center">Covid-19 Vaccine Card</h5>
+                            <h5 className="d-flex justify-content-center">Covid-19 Vaccine Certificate</h5>
                             {/*<h5 className="d-flex justify-content-center">Vaccine Distribution System</h5>*/}
                             <h6 className="d-flex justify-content-center">Supported By: Uttara University</h6>
                         </div>
@@ -48,22 +47,26 @@ const VaccineCardDownload = () => {
                             <hr/>
                             <div className="my-0 py-0 align-items-center">
                                 <div className="d-flex justify-content-center">
-                                    <div className="w-50 m-2 d-flex justify-content-start align-items-center">
+                                    <div className="w-50 d-flex justify-content-center align-items-center">
                                         <h6>1st dose: </h6>
+                                        <h6 className="ms-1"><strong>20 June, 2021</strong></h6>
                                     </div>
                                     <div className="vl-1"/>
-                                    <div className="w-50 m-2 d-flex justify-content-start align-items-center">
+                                    <div className="w-50 d-flex justify-content-center align-items-center">
                                         <h6>Vaccine : </h6>
+                                        <h6 className="ms-1"><strong>Moderna</strong></h6>
                                     </div>
                                 </div>
                                 <hr/>
                                 <div className=" d-flex justify-content-center">
-                                    <div className="w-50 m-2 d-flex justify-content-start align-items-center">
+                                    <div className="w-50 m-1 d-flex justify-content-center align-items-center">
                                         <h6>2nd dose: </h6>
+                                        <h6 className="ms-1"><strong>20 June, 2021</strong></h6>
                                     </div>
                                     <div className="vl-1"/>
-                                    <div className="w-50 m-2 d-flex justify-content-start align-items-center">
+                                    <div className="w-50 m-1 d-flex justify-content-center align-items-center">
                                         <h6>Vaccine : </h6>
+                                        <h6 className="ms-1"><strong>Covishild</strong></h6>
                                     </div>
                                 </div>
                             </div>
@@ -82,8 +85,7 @@ const VaccineCardDownload = () => {
                 <Button onClick={window.print} className="btn btn-warning">Print</Button>
             </div>
         </Container>
-
     );
 };
 
-export default VaccineCardDownload;
+export default CertificateDownload;

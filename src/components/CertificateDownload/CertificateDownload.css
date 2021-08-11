@@ -1,0 +1,23 @@
+
+
+@media print {
+    @page {
+        size: landscape;
+    }
+
+    .page { page-break-after:always; }
+
+    body * {
+        visibility: hidden;
+    }
+
+    .section-to-print, .section-to-print * {
+        visibility: visible;
+    }
+
+    .section-to-print {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}

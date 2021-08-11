@@ -11,6 +11,7 @@ import VaccineStatus from "./components/VaccineStatus/VaccineStatus";
 import Login from "./components/Login/Login";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import VaccineCardDownload from "./components/VaccineCardDownload/VaccineCardDownload";
+import CertificateDownload from "./components/CertificateDownload/CertificateDownload";
 
 function App() {
     return (
@@ -30,6 +31,9 @@ function App() {
                     </Route>
                     <Route path="/enroll">
                         <Enroll/>
+                    </Route>
+                    <Route path="/certificate/download">
+                        <CertificateDownload/>
                     </Route>
                     <Route path="/certificate">
                         <Certificate/>
