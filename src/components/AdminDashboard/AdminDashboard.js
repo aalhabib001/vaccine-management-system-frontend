@@ -24,27 +24,43 @@ const AdminDashboard = () => {
                 <Table striped bordered hover responsive>
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Full Name</th>
-                        <th>Phone No</th>
-                        <th>1st Dose</th>
-                        <th>2nd Dose</th>
-                    </tr>
-                    <tr>
-                        <th>#</th>
                         <th>
-                            <Input
-                                placeholder="Search By Name"
-                                id="byName"
-                                onBlur={handleOnBlur}
-                            />
+                            <div className="d-flex justify-content-center">#</div>
                         </th>
                         <th>
-                            <Input
-                                placeholder="Search By Phone"
-                                id="byPhone"
-                                onBlur={handleOnBlur}
-                            />
+                            <div className="d-flex justify-content-center">Full Name</div>
+                        </th>
+                        <th>
+                            <div className="d-flex justify-content-center">Phone No</div>
+                        </th>
+                        <th>
+                            <div className="d-flex justify-content-center">1st Dose</div>
+                        </th>
+                        <th>
+                            <div className="d-flex justify-content-center">2nd Dose</div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div className="d-flex justify-content-center">#</div>
+                        </th>
+                        <th>
+                            <div className="d-flex justify-content-center">
+                                <Input
+                                    placeholder="Search By Name"
+                                    id="byName"
+                                    onBlur={handleOnBlur}
+                                />
+                            </div>
+                        </th>
+                        <th>
+                            <div className="d-flex justify-content-center">
+                                <Input
+                                    placeholder="Search By Phone"
+                                    id="byPhone"
+                                    onBlur={handleOnBlur}
+                                />
+                            </div>
                         </th>
                         {/*<th/>*/}
                         {/*<th/>*/}
