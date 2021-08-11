@@ -1,0 +1,40 @@
+
+.border-div {
+    border: 2px dashed black;
+}
+
+.border-div-2 {
+    border: 2px solid black;
+    width: 100%;
+}
+.vl-1 {
+    border-left: 1px solid royalblue;
+    height: 65px;
+}
+
+@media (min-width: 600px) {
+    .border-div-2 {
+        border: 2px solid black;
+        width: 49%;
+    }
+}
+
+@media print {
+    @page {
+        size: landscape;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    .section-to-print, .section-to-print * {
+        visibility: visible;
+    }
+
+    .section-to-print {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}

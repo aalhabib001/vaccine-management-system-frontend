@@ -3,6 +3,8 @@ import './Stepper.css'
 import NidPhoneStep from "../../NidPhoneStep/NidPhoneStep";
 import HorizontalStepper from "../../HorizontalStepper/HorizontalStepper";
 import StepperDownButton from "../../HorizontalStepper/StepperDownButton";
+import {Button} from "bootstrap";
+import VaccineCardDownload from "../../VaccineCardDownload/VaccineCardDownload";
 
 
 function getSteps() {
@@ -29,7 +31,8 @@ export default function VaccineCardStepper() {
                 );
             case 1:
                 return (
-                    <StepperDownButton buttonText="Download Vaccine Card"/>
+                    // <StepperDownButton buttonText="Download Vaccine Card" onClick={ window.open('http://www.google.com', '_blank')}/>);
+                    <VaccineCardDownload/>
                 );
             default:
                 return 'Unknown step';

@@ -10,6 +10,7 @@ import Certificate from "./components/Certificate/Certificate";
 import VaccineStatus from "./components/VaccineStatus/VaccineStatus";
 import Login from "./components/Login/Login";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
+import VaccineCardDownload from "./components/VaccineCardDownload/VaccineCardDownload";
 
 function App() {
     return (
@@ -21,15 +22,21 @@ function App() {
                     <Route exact path="/">
                         <HomePage/>
                     </Route>
-                    <Route path="/enroll">
-                        <Enroll/>
+                    <Route path="/vaccine-card/download">
+                        <VaccineCardDownload/>
                     </Route>
                     <Route path="/vaccine-card">
                         <VaccineCard/>
                     </Route>
+                    <Route path="/enroll">
+                        <Enroll/>
+                    </Route>
                     <Route path="/certificate">
                         <Certificate/>
                     </Route>
+                    {/*<Route path="/certificate/download">*/}
+                    {/*    <Certificate/>*/}
+                    {/*</Route>*/}
                     <Route path="/status">
                         <VaccineStatus/>
                     </Route>
