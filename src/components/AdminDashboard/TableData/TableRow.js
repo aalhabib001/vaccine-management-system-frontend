@@ -39,8 +39,8 @@ const TableRow = (props) => {
 
     const getDoseField = (dose, doseId, vaccine, vacName) => {
         if (dose == null) {
-            return <div className="d-flex justify-content-center  mx-2">
-                <div className="d-flex justify-content-center  mx-2">
+            return <div className="d-flex justify-content-start my-2">
+                <div className="d-flex justify-content-start mx-0">
                     <TextField
                         id="1"
                         margin="none"
@@ -50,16 +50,20 @@ const TableRow = (props) => {
                         InputLabelProps={{
                             shrink: true,
                         }}
+                        style={{minWidth: '122px'}}
+                        className="mx-2 "
                     />
+                </div>
 
-                    <FormControl className={classes.formControl} style={{ margin: '0', marginLeft: '15px' }}>
+                <div className="d-flex justify-content-between mx-0">
+                    <FormControl className={classes.formControl} style={{margin: '0', marginLeft: '0px'}}>
                         <Select
                             labelId="demo-simple-select-label"
                             name={doseId}
                             value={vaccine}
                             displayEmpty
                             onChange={handleChange}
-
+                            className="vac-select "
                         >
                             <MenuItem value="" disabled>
                                 Vaccine
@@ -73,24 +77,23 @@ const TableRow = (props) => {
                             <MenuItem value={'Janssen'}>Janssen</MenuItem>
                         </Select>
                     </FormControl>
-                </div>
-                <div>
                     {
                         (doseId === 1) ?
-                            <button className="btn btn-outline-success ms-3 "><i className="fas fa-check-circle"/>
+                            <button className="btn btn-outline-success ms-3">
+                                <i className="fas fa-check-circle"/>
                             </button> :
                             <button className="btn btn-outline-danger ms-3 "><i className="fas fa-check-circle"/>
                             </button>
                     }
-
-
                 </div>
 
             </div>;
         } else {
-            return <div className="mx-2 my-2">
-                <div className="d-flex mx-2">
-                    <p className="mx-2 ">Date: {dose}</p>
+            return <div className="mx-0 d-flex justify-content-start my-2">
+                <div className="d-flex justify-content-start mx-0">
+                    <p className="mx-2">Date: {dose}</p>
+                </div>
+                <div className="d-flex justify-content-start mx-0">
                     <p className="ms-5">Vaccine: {vacName} </p>
                 </div>
             </div>;
@@ -100,11 +103,21 @@ const TableRow = (props) => {
 
     return (
         <tr>
-            <td><div className="d-flex justify-content-center my-2">{id}</div></td>
-            <td><div className="d-flex justify-content-center my-2" style={{ minWidth: '150px' }}>{fullName}</div></td>
-            <td><div className="d-flex justify-content-center my-2" style={{ minWidth: '120px' }}><p>{phoneNo}</p></div></td>
-            <td className="">{getDoseField(firstDose, 1, vaccine1, firstVac)}</td>
-            <td className="">{getDoseField(secondDose, 2, vaccine2, secondVac)}</td>
+            <td>
+                <div className="d-flex justify-content-center my-2">{id}</div>
+            </td>
+            <td>
+                <div className="d-flex justify-content-center my-2" style={{minWidth: '150px'}}>{fullName}</div>
+            </td>
+            <td>
+                <div className="d-flex justify-content-center my-2" style={{minWidth: '120px'}}><p>{phoneNo}</p></div>
+            </td>
+            <td>
+                <div style={{minWidth: '400px'}}>{getDoseField(firstDose, 1, vaccine1, firstVac)}</div>
+            </td>
+            <td>
+                <div style={{minWidth: '400px'}}>{getDoseField(secondDose, 2, vaccine2, secondVac)}</div>
+            </td>
         </tr>
     );
 };

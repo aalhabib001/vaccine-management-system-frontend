@@ -3,4 +3,24 @@ p {
     margin-bottom: 0;
 }
 
+.vac-select {
+    margin-left: 0;
+    min-width: 100px;
+}
+
+/*.vac-name {*/
+/*    margin-left: 48px;*/
+/*}*/
+
+@media (max-width: 600px) {
+
+    .vac-select {
+        margin-left: 20px;
+        min-width: 140px;
+    }
+
+    /*.vac-name {*/
+    /*    margin-left: 50px;*/
+    /*}*/
+}
 

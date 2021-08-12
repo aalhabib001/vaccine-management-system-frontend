@@ -28,7 +28,9 @@ export default function StatusStepper() {
                 );
             case 1:
                 return (
-                    <StepperDownButton buttonText="Download Vaccine Certificate"/>
+                    <div className="d-flex justify-content-center">
+                        <h5>You Are Registered For Vaccine</h5>
+                    </div>
                 );
             default:
                 return 'Unknown step';
