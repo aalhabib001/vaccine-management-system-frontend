@@ -28,7 +28,6 @@ export default function CertificateStepper() {
     const [certificateData, setCertificateData] = useState("");
 
     const handleOnBlur = (event) => {
-
         const vaccineCardDataTemp = {...vaccineCertificateData}
         vaccineCardDataTemp[event.target.id] = event.target.value
         setVaccineCertificateData(vaccineCardDataTemp)

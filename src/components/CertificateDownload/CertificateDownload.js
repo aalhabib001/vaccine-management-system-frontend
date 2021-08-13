@@ -4,6 +4,7 @@ import uuLogo from "../../images/uu-logo.png";
 import siteLogo from "../../images/LOGO.png";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import QRCode from 'qrcode.react';
+import './CertificateDownload.css'
 
 const CertificateDownload = (props) => {
     const {

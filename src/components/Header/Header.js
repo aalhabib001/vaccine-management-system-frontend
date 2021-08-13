@@ -1,11 +1,32 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Container, Nav, Navbar} from "react-bootstrap";
 import './Header.css'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 // import logo from "../../images/LOGO.png"
 import logo from "../../images/logo-2.png"
+import {LoginContext} from "../../App";
 
 const Header = () => {
+
+    const history = useHistory()
+
+    const [loggedIn, setLoggedIn] = useContext(LoginContext)
+
+    useEffect(() => {
+        let token = localStorage.getItem('token')
+
+        if (token) {
+            setLoggedIn(token);
+        }
+
+    }, [loggedIn])
+
+    const onLogOut = () => {
+        localStorage.clear();
+        setLoggedIn('')
+        history.push('/')
+    }
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="sticky-top">
             <Container>
@@ -47,11 +68,29 @@ const Header = () => {
                             className="nav-link active text-dark mr-3">
                             Status
                         </Link>
-                        <Link
-                            style={{fontSize: '19px'}} to="/login"
-                            className="nav-link active text-dark mr-3">
-                            <button className="btn btn-primary">Admin Login</button>
-                        </Link>
+
+                        {
+                            (loggedIn) ?
+                                <div className="d-flex justify-content-between">
+                                    <Link
+                                        style={{fontSize: '19px'}} to="/admin"
+                                        className="nav-link active text-dark mr-3">
+                                        <button className="btn btn-success">Admin Dashboard</button>
+                                    </Link>
+                                    <div
+                                        style={{fontSize: '19px'}}
+                                        className="nav-link active text-dark mr-3">
+                                        <button className="btn btn-warning" onClick={onLogOut} >Logout</button>
+                                    </div>
+                                </div>
+                                :
+                                <Link
+                                    style={{fontSize: '19px'}} to="/login"
+                                    className="nav-link active text-dark mr-3">
+                                    <button className="btn btn-primary">Admin Login</button>
+                                </Link>
+                        }
+
                     </Nav>
                 </Navbar.Collapse>
             </Container>
