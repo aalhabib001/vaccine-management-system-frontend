@@ -86,25 +86,25 @@ const Login = () => {
 
                             <Form.Group controlId="email">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" onBlur={handleOnBlur} placeholder="Enter email" required/>
+                                <Form.Control type="email" autocomplete="off" onBlur={handleOnBlur} placeholder="Enter email" required/>
                             </Form.Group>
 
                         </div>
                         <div className="form-input-3">
                             <Form.Group controlId="password">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" onBlur={handleOnBlur} placeholder="Password" required/>
+                                <Form.Control type="password" autocomplete="off" onBlur={handleOnBlur} placeholder="Password" required/>
                             </Form.Group>
                         </div>
-                        <div className="form-input-3">
-                            <div className="d-flex justify-content-between">
-                                <Form.Group controlId="formBasicCheckbox">
-                                    <Form.Check type="checkbox" label="Remember Me"/>
-                                </Form.Group>
-                                {/*<p className="no-button">Forget Password</p>*/}
-                            </div>
+                        {/*<div className="form-input-3">*/}
+                        {/*    <div className="d-flex justify-content-between">*/}
+                        {/*        <Form.Group controlId="formBasicCheckbox">*/}
+                        {/*            <Form.Check type="checkbox" label="Remember Me"/>*/}
+                        {/*        </Form.Group>*/}
+                        {/*        /!*<p className="no-button">Forget Password</p>*!/*/}
+                        {/*    </div>*/}
 
-                        </div>
+                        {/*</div>*/}
                         <div className="form-input-3">
                             {/*<Link to="/admin">*/}
                             <Button className="w-100 mb-3" variant="primary" onClick={handleLogin}>Login</Button>
