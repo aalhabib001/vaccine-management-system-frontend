@@ -13,6 +13,7 @@ import './Stepper.css'
 import {TextField} from "@material-ui/core";
 import axios from "axios";
 import {useSnackbar} from "notistack";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -67,63 +68,89 @@ export default function VerticalLinearStepper() {
     };
 
     async function checkNidData(): boolean {
-        handleClickVariant('info', "Checking NID")
 
-        let isOk = false;
+        if (enrollData.nid && enrollData.phoneNo) {
+            handleClickVariant('info', "Checking NID")
 
-        await axios({
-            method: 'post',
-            url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/enroll/verify-nid?nid=' + enrollData.nid,
-            headers: {'Content-Type': 'application/json'}
-        }).then(res => {
-            console.log(res.data)
+            let isOk = false;
 
-            handleClickVariant('success', res.data.message)
+            await axios({
+                method: 'post',
+                url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/enroll/verify-nid?nid=' + enrollData.nid,
+                headers: {'Content-Type': 'application/json'}
+            }).then(res => {
+                console.log(res.data)
 
-            isOk = true;
-        })
-            .catch(error => {
-                // console.log(error.response)
-                let errorData = error.response.data
+                handleClickVariant('success', res.data.message)
 
-                handleClickVariant('error', errorData.message)
-
-                isOk = false;
+                isOk = true;
             })
+                .catch(error => {
+                    // console.log(error.response)
+                    if (error.response.data) {
+                        let errorData = error.response.data
 
-        return isOk;
+                        handleClickVariant('error', errorData.message)
+                    } else {
+                        handleClickVariant('error', "There is a problem on connecting with server")
+                    }
+
+                    isOk = false;
+                })
+
+            return isOk;
+        } else {
+            handleClickVariant('warning', "Please Fill the input box")
+        }
     }
 
 
     async function saveEnrollData(): boolean {
+        if (enrollData.otp) {
+            handleClickVariant('info', "Saving Data")
 
-        handleClickVariant('info', "Saving Data")
+            let isOk = false;
 
-        let isOk = false;
+            await axios({
+                method: 'post',
+                url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/enroll',
+                headers: {'Content-Type': 'application/json'},
+                data: enrollData
+            }).then(res => {
+                console.log(res.data)
 
-        await axios({
-            method: 'post',
-            url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/enroll',
-            headers: {'Content-Type': 'application/json'},
-            data: enrollData
-        }).then(res => {
-            console.log(res.data)
+                handleClickVariant('success', res.data.message)
 
-            handleClickVariant('success', res.data.message)
+                setEnrollData({
+                    nid: "",
+                    phoneNo: "",
+                    fullName: "",
+                    vaccineCenter: "",
+                    dateOfBirth: "",
+                    address: "",
+                    otp: ""
+                })
 
-
-            isOk = true;
-        })
-            .catch(error => {
-                // console.log(error)
-                let errorData = error.response.data
-
-                handleClickVariant('error', errorData.message)
-
-                isOk = false;
+                isOk = true;
             })
+                .catch(error => {
+                    // console.log(error)
+                    if (error.response.data) {
+                        let errorData = error.response.data
 
-        return isOk;
+                        handleClickVariant('error', errorData.message)
+                    } else {
+                        handleClickVariant('error', "There is a problem on connecting with server")
+                    }
+
+
+                    isOk = false;
+                })
+
+            return isOk;
+        } else {
+            handleClickVariant('warning', "Please Fill all the input box")
+        }
     }
 
     const handleNext = async () => {
@@ -133,7 +160,11 @@ export default function VerticalLinearStepper() {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
             }
         } else if (activeStep === 1) {
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            if (enrollData.fullName && enrollData.vaccineCenter && enrollData.dateOfBirth && enrollData.address) {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            } else {
+                handleClickVariant('warning', "Please Fill all the input box")
+            }
         } else if (activeStep === 2) {
             if (await saveEnrollData()) {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -311,7 +342,22 @@ export default function VerticalLinearStepper() {
             </Stepper>
             {activeStep === steps.length && (
                 <Paper square elevation={0} className={classes.resetContainer}>
-                    <Typography>Vaccine Registration Completed</Typography>
+                    <div className="d-flex justify-content-center">
+                        <div>
+                            <h5 className="d-flex justify-content-center my-3"><h4>Vaccine Registration Completed</h4>
+                            </h5>
+                            <h5 className="d-flex justify-content-center my-3">Go to your selected vaccine center with
+                                vaccine card </h5>
+                            <div className="d-flex justify-content-center my-3">
+                                <Link to="/vaccine-card">
+                                    <button className="btn btn-primary">Download Vaccine Card From
+                                        Here
+                                    </button>
+                                </Link>
+                            </div>
+
+                        </div>
+                    </div>
                     <Button onClick={handleReset} className={classes.button} variant="contained"
                             color="primary">
                         Register Another

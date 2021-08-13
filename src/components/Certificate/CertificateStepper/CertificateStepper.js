@@ -25,13 +25,13 @@ export default function CertificateStepper() {
         enqueueSnackbar(msg, {variant});
     };
 
-    const [certificateData, setCertificateData] = useState("");
-
     const handleOnBlur = (event) => {
         const vaccineCardDataTemp = {...vaccineCertificateData}
         vaccineCardDataTemp[event.target.id] = event.target.value
         setVaccineCertificateData(vaccineCardDataTemp)
     }
+
+    const [certificateData, setCertificateData] = useState("");
 
     async function checkVaccineCertificate(): boolean {
         console.log(vaccineCertificateData)
