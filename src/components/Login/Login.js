@@ -24,7 +24,6 @@ const Login = () => {
         enqueueSnackbar(msg, {variant});
     };
 
-
     const handleLogin = async () => {
         console.log(loginData)
 
@@ -76,12 +75,16 @@ const Login = () => {
         setLoginData(loginDataTemp)
     }
 
+    const handleSubmit = () => {
+        console.log(loginData)
+    }
+
     return (
         <>
             <div className="d-flex justify-content-center">
                 <div className="login-box border p-4 ">
                     <h4>Login</h4>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <div className="form-input-3">
 
                             <Form.Group controlId="email">
@@ -107,7 +110,8 @@ const Login = () => {
                         {/*</div>*/}
                         <div className="form-input-3">
                             {/*<Link to="/admin">*/}
-                            <Button className="w-100 mb-3" variant="primary" onClick={handleLogin}>Login</Button>
+                            {/*<Button className="w-100 mb-3" variant="primary" onClick={handleLogin}>Login</Button>*/}
+                            <Button className="w-100 mb-3" variant="primary" type="submit">Login</Button>
                             {/*</Link>*/}
                         </div>
                         {/*<div className="d-flex justify-content-start">*/}
