@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -11,6 +11,9 @@ import {Container, Form} from "react-bootstrap";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import './Stepper.css'
 import {TextField} from "@material-ui/core";
+import axios from "axios";
+import {AlertContext} from "../../../App";
+import CustomizedSnackbars from "../../AlertSnackbar/AlertSnackbar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,13 +41,107 @@ export default function VerticalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
 
+    const [alertData, setAlertData] = useContext(AlertContext)
+    const [enrollData, setEnrollData] = useState({
+        nid: "",
+        phoneNo: "",
+        fullName: "",
+        vaccineCenter: "",
+        dateOfBirth: "",
+        address: "",
+        otp: ""
+    });
+
     const handleOnBlur = (event) => {
-        console.log(event.target.value);
-        console.log(event.target.id);
-        // const newServiceTemp = {...newService}
-        // newServiceTemp[event.target.id] = event.target.value
-        // setNewService(newServiceTemp)
+        // console.log(event.target);
+        // console.log(event.target.value);
+        // console.log(event.target.id);
+
+        const enrollDataTemp = {...enrollData}
+        enrollDataTemp[event.target.id] = event.target.value
+        setEnrollData(enrollDataTemp)
     }
+
+    async function checkNidData(): boolean {
+        setAlertData({isOpen: true, msg: "Checking NID", type: 'info'})
+        let isOk = false;
+
+        await axios({
+            method: 'post',
+            url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/enroll/verify-nid?nid=' + enrollData.nid,
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => {
+            console.log(res.data)
+            setAlertData({isOpen: true, msg: res.data.message, type: 'success'})
+
+            isOk = true;
+        })
+            .catch(error => {
+                // console.log(error.response)
+                let errorData = error.response.data
+
+                setAlertData({isOpen: true, msg: errorData.message, type: 'error'})
+
+                isOk = false;
+            })
+
+        return isOk;
+    }
+
+
+    async function saveEnrollData(): boolean {
+
+        setAlertData({isOpen: true, msg: "Saving Data", type: 'info'})
+        let isOk = false;
+
+        await axios({
+            method: 'post',
+            url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/enroll',
+            headers: {'Content-Type': 'application/json'},
+            data: enrollData
+        }).then(res => {
+            console.log(res.data)
+            setAlertData({isOpen: true, msg: res.data.message, type: 'success'})
+
+            isOk = true;
+        })
+            .catch(error => {
+                // console.log(error)
+                let errorData = error.response.data
+
+                setAlertData({isOpen: true, msg: errorData.message, type: 'error'})
+
+                isOk = false;
+            })
+
+        return isOk;
+    }
+
+    const handleNext = async () => {
+        console.log(activeStep)
+        if (activeStep === 0) {
+            if (await checkNidData()) {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            }
+        } else if (activeStep === 1) {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        } else if (activeStep === 2) {
+            if (await saveEnrollData()) {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            }
+        }
+
+
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    const handleReset = () => {
+        setActiveStep(0);
+    };
+
 
     const top100Films = [
         {title: 'Bangabandhu Sheikh Mujib Medical University Hospital'},
@@ -64,7 +161,7 @@ export default function VerticalLinearStepper() {
                         <Form>
                             <div className="form-input">
                                 <TextField
-                                    id="national-id-no"
+                                    id="nid"
                                     label="National Id No"
                                     margin="normal"
                                     variant="standard"
@@ -74,7 +171,7 @@ export default function VerticalLinearStepper() {
                             </div>
                             <div className="form-input">
                                 <TextField
-                                    id="phone-no"
+                                    id="phoneNo"
                                     label="Phone No"
                                     margin="normal"
                                     variant="standard"
@@ -91,7 +188,7 @@ export default function VerticalLinearStepper() {
                         <Form>
                             <div className="form-input">
                                 <TextField
-                                    id="full-name"
+                                    id="fullName"
                                     label="Full Name"
                                     margin="normal"
                                     variant="standard"
@@ -102,7 +199,7 @@ export default function VerticalLinearStepper() {
                                 <Autocomplete
                                     freeSolo
                                     disableClearable
-                                    id="vaccine-center"
+                                    id="vaccineCenter"
                                     options={top100Films.map((option) => option.title)}
                                     renderInput={(params) => (
                                         <TextField
@@ -118,7 +215,7 @@ export default function VerticalLinearStepper() {
                             </div>
                             <div className="form-input">
                                 <TextField
-                                    id="date-of-birth"
+                                    id="dateOfBirth"
                                     label="Date Of Birth"
                                     margin="normal"
                                     variant="standard"
@@ -171,21 +268,6 @@ export default function VerticalLinearStepper() {
         }
     }
 
-    const handleNext = () => {
-
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        }
-    ;
-
-    const handleBack = () => {
-            setActiveStep((prevActiveStep) => prevActiveStep - 1);
-        }
-    ;
-
-    const handleReset = () => {
-            setActiveStep(0);
-        }
-    ;
 
     return (
         <div className={classes.root}>
@@ -227,6 +309,8 @@ export default function VerticalLinearStepper() {
                     </Button>
                 </Paper>
             )}
+
+            <CustomizedSnackbars/>
         </div>
     );
 }

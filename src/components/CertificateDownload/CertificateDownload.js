@@ -4,7 +4,20 @@ import uuLogo from "../../images/uu-logo.png";
 import siteLogo from "../../images/LOGO.png";
 import {Button, Container} from "react-bootstrap";
 
-const CertificateDownload = () => {
+const CertificateDownload = (props) => {
+    const {
+        address,
+        dateOfBirth,
+        fullName,
+        nid,
+        phoneNo,
+        vaccineCenter,
+        firstDose,
+        secondDose,
+        firstVac,
+        secondVac
+    } = props.certificateData
+
     return (
         <Container>
 
@@ -32,12 +45,12 @@ const CertificateDownload = () => {
                             </div>
                             <hr/>
                             <div>
-                                <h6>Name: Abdullah AL Habib</h6>
-                                <h6>Phone: 01515212687</h6>
-                                <h6>NID: 1256321452</h6>
-                                <h6>Date of Birth: 14 Nov, 1999</h6>
-                                <h6>Vaccine Center: Combined Military Hospital (CMH)</h6>
-                                <h6>Address: Uttara, Dhaka</h6>
+                                <h6>Name: {fullName}</h6>
+                                <h6>Phone: {phoneNo}</h6>
+                                <h6>NID: {nid}</h6>
+                                <h6>Date of Birth: {dateOfBirth}</h6>
+                                <h6>Vaccine Center: {vaccineCenter}</h6>
+                                <h6>Address: {address}</h6>
                             </div>
                         </div>
                         <div className="p-2 m-1 border-div-2 col-sm-6" style={{width: ''}}>
@@ -49,24 +62,24 @@ const CertificateDownload = () => {
                                 <div className="d-flex justify-content-center">
                                     <div className="w-50 d-flex justify-content-center align-items-center">
                                         <h6>1st dose: </h6>
-                                        <h6 className="ms-1"><strong>20 June, 2021</strong></h6>
+                                        <h6 className="ms-1"><strong>{firstDose}</strong></h6>
                                     </div>
                                     <div className="vl-1"/>
                                     <div className="w-50 d-flex justify-content-center align-items-center">
                                         <h6>Vaccine : </h6>
-                                        <h6 className="ms-1"><strong>Moderna</strong></h6>
+                                        <h6 className="ms-1"><strong>{firstVac}</strong></h6>
                                     </div>
                                 </div>
                                 <hr/>
                                 <div className=" d-flex justify-content-center">
                                     <div className="w-50 m-1 d-flex justify-content-center align-items-center">
                                         <h6>2nd dose: </h6>
-                                        <h6 className="ms-1"><strong>20 June, 2021</strong></h6>
+                                        <h6 className="ms-1"><strong>{secondDose}</strong></h6>
                                     </div>
                                     <div className="vl-1"/>
                                     <div className="w-50 m-1 d-flex justify-content-center align-items-center">
                                         <h6>Vaccine : </h6>
-                                        <h6 className="ms-1"><strong>Covishild</strong></h6>
+                                        <h6 className="ms-1"><strong>{secondVac}</strong></h6>
                                     </div>
                                 </div>
                             </div>

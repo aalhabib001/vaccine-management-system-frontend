@@ -8,6 +8,10 @@ p {
     min-width: 100px;
 }
 
+select {
+    background: transparent;
+}
+
 /*.vac-name {*/
 /*    margin-left: 48px;*/
 /*}*/

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Container, Table} from "react-bootstrap";
 import {vaccineFakeData} from "./VaccineFakeData";
 import TableRow from "./TableData/TableRow";
 import {Input} from "@material-ui/core";
+import axios from "axios";
+import CustomizedSnackbars from "../AlertSnackbar/AlertSnackbar";
+import {AlertContext} from "../../App";
 
 const AdminDashboard = () => {
 
@@ -13,6 +16,46 @@ const AdminDashboard = () => {
         // newServiceTemp[event.target.id] = event.target.value
         // setNewService(newServiceTemp)
     }
+
+    const [value, setValue] = useState(1);
+    const [vaccineData, setVaccineData] = useState([]);
+
+    useEffect(() => {
+
+        setAlertData({
+            isOpen: true,
+            msg: "Data Loading from Internet",
+            type: 'info'
+        })
+
+        axios({
+            method: 'get',
+            url: 'https://vaccine-ms-01.herokuapp.com/api/admin/vaccine-infos',
+            headers: {'Content-Type': 'application/json'}
+        })
+            .then(res => {
+                console.log(res.data)
+                setVaccineData(res.data.data)
+                setAlertData({
+                    isOpen: true,
+                    msg: "Data Loaded from Internet",
+                    type: 'success'
+                })
+            })
+            .catch(error => {
+                let errorData = error.response.data
+                console.log(errorData)
+
+                setAlertData({
+                    isOpen: true,
+                    msg: errorData.message,
+                    type: 'error'
+                })
+            })
+
+    }, [value])
+
+    const [alertData, setAlertData] = useContext(AlertContext)
 
 
     return (
@@ -29,6 +72,9 @@ const AdminDashboard = () => {
                         </th>
                         <th>
                             <div className="d-flex justify-content-center">Full Name</div>
+                        </th>
+                        <th>
+                            <div className="d-flex justify-content-center">NID</div>
                         </th>
                         <th>
                             <div className="d-flex justify-content-center">Phone No</div>
@@ -68,10 +114,14 @@ const AdminDashboard = () => {
                     </thead>
                     <tbody>
                     {
-                        vaccineFakeData.map(vaccineData => <TableRow vaccineData={vaccineData} key={vaccineData.id}/>)
+                        vaccineData.map((vaccineInfo, index) => <TableRow vaccineData={vaccineInfo}
+                                                                          key={vaccineInfo._id} index={index} setValue={setValue} value={value} />)
                     }
                     </tbody>
                 </Table>
+
+                <CustomizedSnackbars/>
+
             </Container>
 
         </div>

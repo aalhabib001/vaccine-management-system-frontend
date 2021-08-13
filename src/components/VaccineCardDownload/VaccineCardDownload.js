@@ -5,7 +5,11 @@ import uuLogo from "../../images/uu-logo.png"
 import bdGovt from "../../images/bd-govt.png"
 import siteLogo from '../../images/LOGO.png'
 
-const VaccineCardDownload = () => {
+const VaccineCardDownload = (props) => {
+
+    const {address, dateOfBirth, fullName, nid, phoneNo, vaccineCenter} = props.cardData;
+    console.log(props.cardData)
+
     return (
         <Container>
 
@@ -33,12 +37,12 @@ const VaccineCardDownload = () => {
                             </div>
                             <hr/>
                             <div>
-                                <h6>Name: Abdullah AL Habib</h6>
-                                <h6>Phone: 01515212687</h6>
-                                <h6>NID: 1256321452</h6>
-                                <h6>Date of Birth: 14 Nov, 1999</h6>
-                                <h6>Vaccine Center: Combined Military Hospital (CMH)</h6>
-                                <h6>Address: Uttara, Dhaka</h6>
+                                <h6>Name: {fullName}</h6>
+                                <h6>Phone: {phoneNo}</h6>
+                                <h6>NID: {nid}</h6>
+                                <h6>Date of Birth: {dateOfBirth}</h6>
+                                <h6>Vaccine Center: {vaccineCenter}</h6>
+                                <h6>Address: {address}</h6>
                             </div>
                         </div>
                         <div className="p-2 m-1 border-div-2 col-sm-6" style={{width: ''}}>

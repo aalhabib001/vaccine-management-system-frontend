@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
-import {FormControl, InputLabel, MenuItem, Select, TextField} from "@material-ui/core";
+import React, {useContext, useState} from 'react';
+import {TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {Form} from "react-bootstrap";
 import './TableRow.css'
+import axios from "axios";
+import {AlertContext} from "../../../App";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -14,86 +17,116 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TableRow = (props) => {
-    const {id, fullName, phoneNo, firstDose, secondDose, firstVac, secondVac} = props.vaccineData;
+    const {_id, fullName, phoneNo, firstDose, secondDose, firstVac, secondVac, nid} = props.vaccineData;
 
+    const [alertData, setAlertData] = useContext(AlertContext)
+    const [vaccineSave, setVaccineSave] = useState({
+        doseId: null,
+        vaccineDate: "",
+        vaccineName: ""
+    })
 
     const handleOnBlur = (event) => {
-        console.log(event.target.value);
-        console.log(event.target.id);
-        // const newServiceTemp = {...newService}
-        // newServiceTemp[event.target.id] = event.target.value
-        // setNewService(newServiceTemp)
+        // console.log(event.target.value);
+        // console.log(event.target.id);
+
+        const vaccineSaveTemp = {...vaccineSave}
+        vaccineSaveTemp[event.target.id] = event.target.value
+        setVaccineSave(vaccineSaveTemp)
     }
 
     const classes = useStyles();
     const [vaccine1, setVaccine1] = useState('');
     const [vaccine2, setVaccine2] = useState('');
 
-    const handleChange = (event) => {
-        if (event.target.name === 1) {
-            setVaccine1(event.target.value)
-        } else {
-            setVaccine2(event.target.value)
-        }
-    };
+
+    const saveVaccineInfo1 = () => {
+        vaccineSave.doseId = 1;
+        console.log(vaccineSave)
+        saveVaccineData()
+    }
+
+    const saveVaccineInfo2 = () => {
+
+        vaccineSave.doseId = 2;
+        console.log(vaccineSave)
+        saveVaccineData()
+    }
+
+    const saveVaccineData = () => {
+        setAlertData({
+            isOpen: true,
+            msg: "Saving Data",
+            type: 'info'
+        })
+        axios({
+            method: 'put',
+            url: 'https://vaccine-ms-01.herokuapp.com/api/admin/vaccine-infos/' + _id,
+            headers: {'Content-Type': 'application/json'},
+            data: vaccineSave
+        })
+            .then(res => {
+                console.log(res.data)
+                // setVaccineData(res.data.data)
+                props.setValue(props.value + 1);
+                setAlertData({
+                    isOpen: true,
+                    msg: "Data Saved",
+                    type: 'success'
+                })
+            })
+            .catch(error => {
+                console.log(error)
+                let errorData = error.response.data
+                console.log(errorData)
+
+                setAlertData({
+                    isOpen: true,
+                    msg: errorData.message,
+                    type: 'error'
+                })
+            })
+    }
+
 
     const getDoseField = (dose, doseId, vaccine, vacName) => {
         if (dose == null) {
             return <div className="d-flex justify-content-start my-2">
                 <div className="d-flex justify-content-start mx-0">
-                    <TextField
-                        id="1"
-                        margin="none"
-                        variant="standard"
-                        type="date"
-                        onBlur={handleOnBlur}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        style={{minWidth: '122px'}}
-                        className="mx-2 "
-                    />
+                    <Form.Group className="mb-0 mx-2" onBlur={handleOnBlur} controlId="vaccineDate" style={{ width: '85%' }}>
+                        <Form.Control type="date" required/>
+                    </Form.Group>
+
                 </div>
 
                 <div className="d-flex justify-content-between mx-0">
-                    <FormControl className={classes.formControl} style={{margin: '0', marginLeft: '0px'}}>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            name={doseId}
-                            value={vaccine}
-                            displayEmpty
-                            onChange={handleChange}
-                            className="vac-select "
-                        >
-                            <MenuItem value="" disabled>
-                                Vaccine
-                            </MenuItem>
-                            <MenuItem value={'Moderna'}>Moderna</MenuItem>
-                            <MenuItem value={'Pfizer'}>Pfizer</MenuItem>
-                            <MenuItem value={'AstraZeneca'}>AstraZeneca</MenuItem>
-                            <MenuItem value={'Sinopharm'}>Sinopharm</MenuItem>
-                            <MenuItem value={'Sinovac'}>Sinovac</MenuItem>
-                            <MenuItem value={'Sputnik'}>Sputnik-V</MenuItem>
-                            <MenuItem value={'Janssen'}>Janssen</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <Form.Group onBlur={handleOnBlur} controlId="vaccineName">
+                        <Form.Select defaultValue="Vaccine">
+                            <option>Vaccine</option>
+                            <option>AstraZeneca</option>
+                            <option>Moderna</option>
+                            <option>Sinopharm</option>
+                            <option>Sinovac</option>
+                        </Form.Select>
+                    </Form.Group>
                     {
                         (doseId === 1) ?
-                            <button className="btn btn-outline-success ms-3">
+                            <button className="btn btn-outline-success ms-3" onClick={saveVaccineInfo1}>
                                 <i className="fas fa-check-circle"/>
                             </button> :
-                            <button className="btn btn-outline-danger ms-3 "><i className="fas fa-check-circle"/>
+                            <button className="btn btn-outline-danger ms-3" onClick={saveVaccineInfo2}>
+                                <i className="fas fa-check-circle"/>
                             </button>
                     }
                 </div>
 
             </div>;
         } else {
-            return <div className="mx-0 d-flex justify-content-start my-2">
+            return <div className="mx-0 d-flex justify-content-start my-3" >
                 <div className="d-flex justify-content-start mx-0">
                     <p className="mx-2">Date: {dose}</p>
                 </div>
-                <div className="d-flex justify-content-start mx-0">
+                <div className="d-flex justify-content-start mx-4">
                     <p className="ms-5">Vaccine: {vacName} </p>
                 </div>
             </div>;
@@ -104,13 +137,16 @@ const TableRow = (props) => {
     return (
         <tr>
             <td>
-                <div className="d-flex justify-content-center my-2">{id}</div>
+                <div className="d-flex justify-content-center my-3">{props.index + 1}</div>
             </td>
             <td>
-                <div className="d-flex justify-content-center my-2" style={{minWidth: '150px'}}>{fullName}</div>
+                <div className="d-flex justify-content-center my-3" style={{minWidth: '180px'}}>{fullName}</div>
             </td>
             <td>
-                <div className="d-flex justify-content-center my-2" style={{minWidth: '120px'}}><p>{phoneNo}</p></div>
+                <div className="d-flex justify-content-center my-3" style={{minWidth: '150px'}}>{nid}</div>
+            </td>
+            <td>
+                <div className="d-flex justify-content-center my-3 align-items-center" style={{minWidth: '120px'}}><p>{phoneNo}</p></div>
             </td>
             <td>
                 <div style={{minWidth: '400px'}}>{getDoseField(firstDose, 1, vaccine1, firstVac)}</div>
