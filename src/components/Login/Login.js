@@ -86,7 +86,7 @@ const Login = () => {
 
                             <Form.Group controlId="email">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" autocomplete="off" onBlur={handleOnBlur} placeholder="Enter email" required/>
+                                <Form.Control type="email" onBlur={handleOnBlur} placeholder="Enter email" required/>
                             </Form.Group>
 
                         </div>
