@@ -2,7 +2,8 @@ import React from 'react';
 import bdGovt from "../../images/bd-govt.png";
 import uuLogo from "../../images/uu-logo.png";
 import siteLogo from "../../images/LOGO.png";
-import {Button, Container} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
+import QRCode from 'qrcode.react';
 
 const CertificateDownload = (props) => {
     const {
@@ -85,12 +86,26 @@ const CertificateDownload = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex justify-content-center mt-3">
-                        <h6>IT Infrastructure From:</h6>
-                    </div>
-                    <div className="d-flex justify-content-center mb-3">
-                        <img src={siteLogo} style={{width: '25%'}} className="img-thumbnail" alt="siteLogo"/>
-                    </div>
+
+                    <Row className="d-flex justify-content-around">
+                        <Col sm={1} md={2}>
+                            <div className="d-flex justify-content-center mt-3">
+                                <h6>Verify:</h6>
+                            </div>
+                            <div className="d-flex justify-content-center mb-3">
+                                <QRCode value={"Name: "+ fullName +"\nNid: "+ nid + "\nPhone: "+ phoneNo} />
+                            </div>
+                        </Col>
+                        <Col sm={1} md={2}>
+                            <div className="d-flex justify-content-center mt-3">
+                                <h6>IT Infrastructure From:</h6>
+                            </div>
+                            <div className="d-flex justify-content-center mb-3">
+                                <img src={siteLogo} style={{ minWidth: '250px' }} className="img-thumbnail" alt="siteLogo"/>
+                            </div>
+                        </Col>
+                    </Row>
+
                 </div>
 
             </div>
