@@ -75,8 +75,14 @@ const Login = () => {
         setLoginData(loginDataTemp)
     }
 
-    const handleSubmit = () => {
-        console.log(loginData)
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+
+        loginData.email = event.target.email.value
+        loginData.password = event.target.password.value
+
+        await handleLogin()
     }
 
     return (
