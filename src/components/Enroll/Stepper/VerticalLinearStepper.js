@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -12,8 +12,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import './Stepper.css'
 import {TextField} from "@material-ui/core";
 import axios from "axios";
-import {AlertContext} from "../../../App";
-import CustomizedSnackbars from "../../AlertSnackbar/AlertSnackbar";
+import {useSnackbar} from "notistack";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,7 +40,6 @@ export default function VerticalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
 
-    const [alertData, setAlertData] = useContext(AlertContext)
     const [enrollData, setEnrollData] = useState({
         nid: "",
         phoneNo: "",
@@ -62,8 +60,15 @@ export default function VerticalLinearStepper() {
         setEnrollData(enrollDataTemp)
     }
 
+    const {enqueueSnackbar} = useSnackbar();
+
+    const handleClickVariant = (variant, msg) => {
+        enqueueSnackbar(msg, {variant});
+    };
+
     async function checkNidData(): boolean {
-        setAlertData({isOpen: true, msg: "Checking NID", type: 'info'})
+        handleClickVariant('info', "Checking NID")
+
         let isOk = false;
 
         await axios({
@@ -72,7 +77,8 @@ export default function VerticalLinearStepper() {
             headers: {'Content-Type': 'application/json'}
         }).then(res => {
             console.log(res.data)
-            setAlertData({isOpen: true, msg: res.data.message, type: 'success'})
+
+            handleClickVariant('success', res.data.message)
 
             isOk = true;
         })
@@ -80,7 +86,7 @@ export default function VerticalLinearStepper() {
                 // console.log(error.response)
                 let errorData = error.response.data
 
-                setAlertData({isOpen: true, msg: errorData.message, type: 'error'})
+                handleClickVariant('error', errorData.message)
 
                 isOk = false;
             })
@@ -91,7 +97,8 @@ export default function VerticalLinearStepper() {
 
     async function saveEnrollData(): boolean {
 
-        setAlertData({isOpen: true, msg: "Saving Data", type: 'info'})
+        handleClickVariant('info', "Saving Data")
+
         let isOk = false;
 
         await axios({
@@ -101,7 +108,9 @@ export default function VerticalLinearStepper() {
             data: enrollData
         }).then(res => {
             console.log(res.data)
-            setAlertData({isOpen: true, msg: res.data.message, type: 'success'})
+
+            handleClickVariant('success', res.data.message)
+
 
             isOk = true;
         })
@@ -109,7 +118,7 @@ export default function VerticalLinearStepper() {
                 // console.log(error)
                 let errorData = error.response.data
 
-                setAlertData({isOpen: true, msg: errorData.message, type: 'error'})
+                handleClickVariant('error', errorData.message)
 
                 isOk = false;
             })
@@ -309,8 +318,6 @@ export default function VerticalLinearStepper() {
                     </Button>
                 </Paper>
             )}
-
-            <CustomizedSnackbars/>
         </div>
     );
 }

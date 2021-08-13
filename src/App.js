@@ -12,25 +12,15 @@ import Login from "./components/Login/Login";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import VaccineCardDownload from "./components/VaccineCardDownload/VaccineCardDownload";
 import CertificateDownload from "./components/CertificateDownload/CertificateDownload";
-import {createContext, useState} from "react";
+import {SnackbarProvider} from "notistack";
 
-export const AlertContext = createContext({
-    isOpen: false,
-    msg: "This is a massage",
-    type: 'success'
-});
 
 function App() {
 
-    const [alertData, setAlertData] = useState({
-        isOpen: false,
-        msg: "This is a massage",
-        type: 'success'
-    });
 
     return (
-        <AlertContext.Provider value={[alertData, setAlertData]}>
-            <Router>
+        <Router>
+            <SnackbarProvider maxSnack={3}>
                 <div>
                     <Header/>
 
@@ -68,8 +58,8 @@ function App() {
                     </Switch>
                     <Footer/>
                 </div>
-            </Router>
-        </AlertContext.Provider>
+            </SnackbarProvider>
+        </Router>
     );
 }
 

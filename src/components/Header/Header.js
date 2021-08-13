@@ -11,8 +11,9 @@ const Header = () => {
             <Container>
                 <Link to="/"
                       className="nav-link active text-dark logo-div-2">
-                    {/*<Navbar.Brand href="#home" className="header-logo">Vaccine Distribution System</Navbar.Brand>*/}
-                    <Navbar.Brand href="#home" className="header-logo"><img className="header-logo-img" src={logo}/>
+
+                    <Navbar.Brand href="#home" className="header-logo">
+                        <img className="header-logo-img" src={logo} alt="logo"/>
                     </Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>

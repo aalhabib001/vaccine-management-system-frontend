@@ -2,7 +2,6 @@ import React from 'react';
 import '../../VaccineCard/Stepper/Stepper.css'
 import NidPhoneStep from "../../NidPhoneStep/NidPhoneStep";
 import HorizontalStepper from "../../HorizontalStepper/HorizontalStepper";
-import StepperDownButton from "../../HorizontalStepper/StepperDownButton";
 
 function getSteps() {
     return ['Verify NID and Phone No', 'Check Status'];

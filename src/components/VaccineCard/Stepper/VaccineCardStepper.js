@@ -1,13 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import './Stepper.css'
 import NidPhoneStep from "../../NidPhoneStep/NidPhoneStep";
 import HorizontalStepper from "../../HorizontalStepper/HorizontalStepper";
-import StepperDownButton from "../../HorizontalStepper/StepperDownButton";
-import {Button} from "bootstrap";
 import VaccineCardDownload from "../../VaccineCardDownload/VaccineCardDownload";
 import axios from "axios";
-import {AlertContext} from "../../../App";
-import CustomizedSnackbars from "../../AlertSnackbar/AlertSnackbar";
+import {useSnackbar} from "notistack";
 
 
 function getSteps() {
@@ -18,11 +15,16 @@ export default function VaccineCardStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
 
-    const [alertData, setAlertData] = useContext(AlertContext)
     const [vaccineCardData, setVaccineCardData] = useState({
         nid: "",
         phoneNo: ""
     });
+
+    const {enqueueSnackbar} = useSnackbar();
+
+    const handleClickVariant = (variant, msg) => {
+        enqueueSnackbar(msg, {variant});
+    };
 
     const [cardData, setCardData] = useState("");
 
@@ -35,31 +37,42 @@ export default function VaccineCardStepper() {
 
     async function checkVaccineCard(): boolean {
 
-        setAlertData({isOpen: true, msg: "Getting Data", type: 'info'})
-        let isOk = false;
+        if(vaccineCardData.nid && vaccineCardData.phoneNo){
 
-        await axios({
-            method: 'post',
-            url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/vaccine-card',
-            headers: {'Content-Type': 'application/json'},
-            data: vaccineCardData
-        }).then(res => {
-            console.log(res.data)
-            setAlertData({isOpen: true, msg: res.data.message, type: 'success'})
-            setCardData(res.data.vaccineInfo)
+            handleClickVariant('info', "Getting Data")
 
-            isOk = true;
-        })
-            .catch(error => {
-                // console.log(error)
-                let errorData = error.response.data
+            let isOk = false;
 
-                setAlertData({isOpen: true, msg: errorData.message, type: 'error'})
+            await axios({
+                method: 'post',
+                url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/vaccine-card',
+                headers: {'Content-Type': 'application/json'},
+                data: vaccineCardData
+            }).then(res => {
+                console.log(res.data)
 
-                isOk = false;
+                handleClickVariant('success', res.data.message)
+
+                setCardData(res.data.vaccineInfo)
+
+                isOk = true;
             })
+                .catch(error => {
+                    // console.log(error)
+                    let errorData = error.response.data
 
-        return isOk;
+                    handleClickVariant('error', errorData.message)
+
+                    isOk = false;
+                })
+
+            return isOk;
+        }
+        else {
+            handleClickVariant('warning', "Please Fill the input box")
+        }
+
+
     }
 
     const handleNext = async () => {
@@ -97,10 +110,9 @@ export default function VaccineCardStepper() {
 
 
     return (
-        <>
-            <HorizontalStepper activeStep={activeStep} steps={steps} handleReset={handleReset}
-                               getStepContent={getStepContent} handleBack={handleBack} handleNext={handleNext}/>
-            <CustomizedSnackbars/>
-        </>
+
+        <HorizontalStepper activeStep={activeStep} steps={steps} handleReset={handleReset}
+                           getStepContent={getStepContent} handleBack={handleBack} handleNext={handleNext}/>
+
     );
 }

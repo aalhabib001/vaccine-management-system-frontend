@@ -1,25 +1,12 @@
-import React, {useContext, useState} from 'react';
-import {TextField} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import React, {useState} from 'react';
 import {Form} from "react-bootstrap";
 import './TableRow.css'
 import axios from "axios";
-import {AlertContext} from "../../../App";
-
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-}));
+import {useSnackbar} from "notistack";
 
 const TableRow = (props) => {
     const {_id, fullName, phoneNo, firstDose, secondDose, firstVac, secondVac, nid} = props.vaccineData;
 
-    const [alertData, setAlertData] = useContext(AlertContext)
     const [vaccineSave, setVaccineSave] = useState({
         doseId: null,
         vaccineDate: "",
@@ -35,7 +22,7 @@ const TableRow = (props) => {
         setVaccineSave(vaccineSaveTemp)
     }
 
-    const classes = useStyles();
+
     const [vaccine1, setVaccine1] = useState('');
     const [vaccine2, setVaccine2] = useState('');
 
@@ -46,46 +33,67 @@ const TableRow = (props) => {
         saveVaccineData()
     }
 
+    const {enqueueSnackbar} = useSnackbar();
+
+    const handleClickVariant = (variant, msg) => {
+        enqueueSnackbar(msg, {variant});
+    };
+
     const saveVaccineInfo2 = () => {
 
         vaccineSave.doseId = 2;
-        console.log(vaccineSave)
-        saveVaccineData()
+
+        if (firstDose) {
+            saveVaccineData()
+        } else {
+            handleClickVariant('warning', "First Dose Data Not Found. Please Set First Dose info First.")
+        }
     }
 
     const saveVaccineData = () => {
-        setAlertData({
-            isOpen: true,
-            msg: "Saving Data",
-            type: 'info'
-        })
-        axios({
-            method: 'put',
-            url: 'https://vaccine-ms-01.herokuapp.com/api/admin/vaccine-infos/' + _id,
-            headers: {'Content-Type': 'application/json'},
-            data: vaccineSave
-        })
-            .then(res => {
-                console.log(res.data)
-                // setVaccineData(res.data.data)
-                props.setValue(props.value + 1);
-                setAlertData({
-                    isOpen: true,
-                    msg: "Data Saved",
-                    type: 'success'
-                })
-            })
-            .catch(error => {
-                console.log(error)
-                let errorData = error.response.data
-                console.log(errorData)
+        if (vaccineSave.doseId && vaccineSave.vaccineName && vaccineSave.vaccineDate && vaccineSave.vaccineName !== 'Vaccine') {
+            console.log("if")
 
-                setAlertData({
-                    isOpen: true,
-                    msg: errorData.message,
-                    type: 'error'
-                })
+            handleClickVariant('info', "Saving Data")
+
+            axios({
+                method: 'put',
+                url: 'https://vaccine-ms-01.herokuapp.com/api/admin/vaccine-infos/' + _id,
+                headers: {'Content-Type': 'application/json'},
+                data: vaccineSave
             })
+                .then(res => {
+                    console.log(res.data)
+                    // setVaccineData(res.data.data)
+                    props.setValue(props.value + 1);
+
+                    handleClickVariant('success', "Data Saved")
+
+                })
+                .catch(error => {
+                    console.log(error)
+                    let errorData = error.response.data
+                    console.log(errorData)
+
+                    handleClickVariant('error', errorData.message)
+
+                })
+
+
+            setVaccineSave({
+                doseId: null,
+                vaccineDate: "",
+                vaccineName: ""
+            })
+        } else {
+
+            console.log("else")
+
+            handleClickVariant('warning', "Please Select Vaccine Info First")
+
+        }
+
+
     }
 
 
@@ -93,13 +101,14 @@ const TableRow = (props) => {
         if (dose == null) {
             return <div className="d-flex justify-content-start my-2">
                 <div className="d-flex justify-content-start mx-0">
-                    <Form.Group className="mb-0 mx-2" onBlur={handleOnBlur} controlId="vaccineDate" style={{ width: '85%' }}>
+                    <Form.Group className="mb-0 mx-2" onBlur={handleOnBlur} controlId="vaccineDate"
+                                style={{width: '80%'}}>
                         <Form.Control type="date" required/>
                     </Form.Group>
 
                 </div>
 
-                <div className="d-flex justify-content-between mx-0">
+                <div className="d-flex justify-content-start mx-0">
                     <Form.Group onBlur={handleOnBlur} controlId="vaccineName">
                         <Form.Select defaultValue="Vaccine">
                             <option>Vaccine</option>
@@ -107,6 +116,9 @@ const TableRow = (props) => {
                             <option>Moderna</option>
                             <option>Sinopharm</option>
                             <option>Sinovac</option>
+                            <option>Pfizer</option>
+                            <option>Sputnik-v</option>
+                            <option>Janssen</option>
                         </Form.Select>
                     </Form.Group>
                     {
@@ -122,7 +134,7 @@ const TableRow = (props) => {
 
             </div>;
         } else {
-            return <div className="mx-0 d-flex justify-content-start my-3" >
+            return <div className="mx-0 d-flex justify-content-start my-3">
                 <div className="d-flex justify-content-start mx-0">
                     <p className="mx-2">Date: {dose}</p>
                 </div>
@@ -135,6 +147,7 @@ const TableRow = (props) => {
 
 
     return (
+
         <tr>
             <td>
                 <div className="d-flex justify-content-center my-3">{props.index + 1}</div>
@@ -143,10 +156,11 @@ const TableRow = (props) => {
                 <div className="d-flex justify-content-center my-3" style={{minWidth: '180px'}}>{fullName}</div>
             </td>
             <td>
-                <div className="d-flex justify-content-center my-3" style={{minWidth: '150px'}}>{nid}</div>
+                <div className="d-flex justify-content-center my-3" style={{minWidth: '110px'}}>{nid}</div>
             </td>
             <td>
-                <div className="d-flex justify-content-center my-3 align-items-center" style={{minWidth: '120px'}}><p>{phoneNo}</p></div>
+                <div className="d-flex justify-content-center my-3 align-items-center" style={{minWidth: '110px'}}>
+                    <p>{phoneNo}</p></div>
             </td>
             <td>
                 <div style={{minWidth: '400px'}}>{getDoseField(firstDose, 1, vaccine1, firstVac)}</div>
@@ -157,5 +171,6 @@ const TableRow = (props) => {
         </tr>
     );
 };
+
 
 export default TableRow;

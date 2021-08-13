@@ -25,7 +25,7 @@ const CertificateDownload = (props) => {
                 <div className="border-div m-1 p-4">
                     <div className="d-flex align-items-start justify-content-center mb-4">
                         <div className="d-flex justify-content-start" style={{width: '15%'}}>
-                            <img src={bdGovt} style={{width: '80%'}} className="img-thumbnail"/>
+                            <img src={bdGovt} style={{width: '80%'}} className="img-thumbnail" alt="bdGovt"/>
                         </div>
                         <div className="mt-3" style={{width: '70%'}}>
                             <h4 className="d-flex justify-content-center">Govt Of The People's Republic Of
@@ -35,7 +35,7 @@ const CertificateDownload = (props) => {
                             <h6 className="d-flex justify-content-center">Supported By: Uttara University</h6>
                         </div>
                         <div className="d-flex justify-content-end" style={{width: '15%'}}>
-                            <img src={uuLogo} style={{width: '80%'}} className="img-thumbnail"/>
+                            <img src={uuLogo} style={{width: '80%'}} className="img-thumbnail" alt="uuLogo"/>
                         </div>
                     </div>
                     <div className=" row">
@@ -89,7 +89,7 @@ const CertificateDownload = (props) => {
                         <h6>IT Infrastructure From:</h6>
                     </div>
                     <div className="d-flex justify-content-center mb-3">
-                        <img src={siteLogo} style={{width: '25%'}} className="img-thumbnail"/>
+                        <img src={siteLogo} style={{width: '25%'}} className="img-thumbnail" alt="siteLogo"/>
                     </div>
                 </div>
 

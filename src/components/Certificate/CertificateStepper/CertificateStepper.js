@@ -1,12 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import '../../VaccineCard/Stepper/Stepper.css'
 import NidPhoneStep from "../../NidPhoneStep/NidPhoneStep";
 import HorizontalStepper from "../../HorizontalStepper/HorizontalStepper";
-import StepperDownButton from "../../HorizontalStepper/StepperDownButton";
 import CertificateDownload from "../../CertificateDownload/CertificateDownload";
-import {AlertContext} from "../../../App";
-import CustomizedSnackbars from "../../AlertSnackbar/AlertSnackbar";
 import axios from "axios";
+import {useSnackbar} from "notistack";
 
 function getSteps() {
     return ['Verify NID and Phone No', 'Download Vaccine Certificate'];
@@ -16,11 +14,16 @@ export default function CertificateStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
 
-    const [alertData, setAlertData] = useContext(AlertContext)
     const [vaccineCertificateData, setVaccineCertificateData] = useState({
         nid: "",
         phoneNo: ""
     });
+
+    const {enqueueSnackbar} = useSnackbar();
+
+    const handleClickVariant = (variant, msg) => {
+        enqueueSnackbar(msg, {variant});
+    };
 
     const [certificateData, setCertificateData] = useState("");
 
@@ -32,32 +35,42 @@ export default function CertificateStepper() {
     }
 
     async function checkVaccineCertificate(): boolean {
+        console.log(vaccineCertificateData)
 
-        setAlertData({isOpen: true, msg: "Getting Data", type: 'info'})
-        let isOk = false;
+        if (vaccineCertificateData.nid && vaccineCertificateData.phoneNo) {
 
-        await axios({
-            method: 'post',
-            url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/vaccine-certificate',
-            headers: {'Content-Type': 'application/json'},
-            data: vaccineCertificateData
-        }).then(res => {
-            console.log(res.data)
-            setAlertData({isOpen: true, msg: res.data.message, type: 'success'})
-            setCertificateData(res.data.vaccineInfo)
+            handleClickVariant('info', "Getting Data")
 
-            isOk = true;
-        })
-            .catch(error => {
-                // console.log(error)
-                let errorData = error.response.data
+            let isOk = false;
 
-                setAlertData({isOpen: true, msg: errorData.message, type: 'error'})
+            await axios({
+                method: 'post',
+                url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/vaccine-certificate',
+                headers: {'Content-Type': 'application/json'},
+                data: vaccineCertificateData
+            }).then(res => {
+                console.log(res.data)
 
-                isOk = false;
+                handleClickVariant('success', res.data.message)
+
+                setCertificateData(res.data.vaccineInfo)
+
+                isOk = true;
             })
+                .catch(error => {
+                    // console.log(error)
+                    let errorData = error.response.data
 
-        return isOk;
+                    handleClickVariant('error', errorData.message)
+
+                    isOk = false;
+                })
+
+            return isOk;
+        } else {
+            handleClickVariant('warning', "Please Fill the input box")
+        }
+
     }
 
     const handleNext = async () => {
@@ -84,7 +97,7 @@ export default function CertificateStepper() {
                 );
             case 1:
                 return (
-                    <CertificateDownload certificateData = {certificateData} />
+                    <CertificateDownload certificateData={certificateData}/>
                     // <StepperDownButton buttonText="Download Vaccine Certificate"/>
                 );
             default:
@@ -94,10 +107,9 @@ export default function CertificateStepper() {
 
 
     return (
-        <>
-            <HorizontalStepper activeStep={activeStep} steps={steps} handleReset={handleReset}
-                               getStepContent={getStepContent} handleBack={handleBack} handleNext={handleNext}/>
-            <CustomizedSnackbars/>
-        </>
+
+        <HorizontalStepper activeStep={activeStep} steps={steps} handleReset={handleReset}
+                           getStepContent={getStepContent} handleBack={handleBack} handleNext={handleNext}/>
+
     );
 }

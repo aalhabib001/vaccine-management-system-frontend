@@ -1,11 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Container, Table} from "react-bootstrap";
-import {vaccineFakeData} from "./VaccineFakeData";
 import TableRow from "./TableData/TableRow";
 import {Input} from "@material-ui/core";
 import axios from "axios";
-import CustomizedSnackbars from "../AlertSnackbar/AlertSnackbar";
-import {AlertContext} from "../../App";
+import {useSnackbar} from "notistack";
 
 const AdminDashboard = () => {
 
@@ -20,13 +18,15 @@ const AdminDashboard = () => {
     const [value, setValue] = useState(1);
     const [vaccineData, setVaccineData] = useState([]);
 
+    const {enqueueSnackbar} = useSnackbar();
+
+    const handleClickVariant = (variant, msg) => {
+        enqueueSnackbar(msg, {variant});
+    };
+
     useEffect(() => {
 
-        setAlertData({
-            isOpen: true,
-            msg: "Data Loading from Internet",
-            type: 'info'
-        })
+        handleClickVariant('info', "Data Loading from Internet")
 
         axios({
             method: 'get',
@@ -36,29 +36,23 @@ const AdminDashboard = () => {
             .then(res => {
                 console.log(res.data)
                 setVaccineData(res.data.data)
-                setAlertData({
-                    isOpen: true,
-                    msg: "Data Loaded from Internet",
-                    type: 'success'
-                })
+
+                handleClickVariant('success', "Data Loaded from Internet")
+
             })
             .catch(error => {
                 let errorData = error.response.data
                 console.log(errorData)
 
-                setAlertData({
-                    isOpen: true,
-                    msg: errorData.message,
-                    type: 'error'
-                })
+                handleClickVariant('error', errorData.message)
             })
 
     }, [value])
 
-    const [alertData, setAlertData] = useContext(AlertContext)
 
 
     return (
+
         <div className="su-main-banner-area-2">
             <div className="d-flex justify-content-center m-3">
                 <h3>Registered Vaccine Users</h3>
@@ -115,12 +109,12 @@ const AdminDashboard = () => {
                     <tbody>
                     {
                         vaccineData.map((vaccineInfo, index) => <TableRow vaccineData={vaccineInfo}
-                                                                          key={vaccineInfo._id} index={index} setValue={setValue} value={value} />)
+                                                                          key={vaccineInfo._id} index={index}
+                                                                          setValue={setValue} value={value}/>)
                     }
                     </tbody>
                 </Table>
 
-                <CustomizedSnackbars/>
 
             </Container>
 
@@ -129,3 +123,4 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
