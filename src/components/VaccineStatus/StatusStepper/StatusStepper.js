@@ -45,7 +45,7 @@ export default function StatusStepper() {
 
             await axios({
                 method: 'post',
-                url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/vaccine-status',
+                url: 'http://localhost:4200/api/vaccine/vaccine-status',
                 headers: {'Content-Type': 'application/json'},
                 data: vaccineStatusData
             }).then(res => {

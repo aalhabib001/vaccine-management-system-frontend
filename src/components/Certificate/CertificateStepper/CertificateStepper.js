@@ -44,7 +44,7 @@ export default function CertificateStepper() {
 
             await axios({
                 method: 'post',
-                url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/vaccine-certificate',
+                url: 'http://localhost:4200/api/vaccine/vaccine-certificate',
                 headers: {'Content-Type': 'application/json'},
                 data: vaccineCertificateData
             }).then(res => {

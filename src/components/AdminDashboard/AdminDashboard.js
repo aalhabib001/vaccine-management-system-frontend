@@ -30,7 +30,7 @@ const AdminDashboard = () => {
 
         axios({
             method: 'get',
-            url: 'https://vaccine-ms-01.herokuapp.com/api/admin/vaccine-infos',
+            url: 'http://localhost:4200/api/admin/vaccine-infos',
             headers: {'Content-Type': 'application/json'}
         })
             .then(res => {

@@ -58,7 +58,7 @@ const TableRow = (props) => {
 
             axios({
                 method: 'put',
-                url: 'https://vaccine-ms-01.herokuapp.com/api/admin/vaccine-infos/' + _id,
+                url: 'http://localhost:4200/api/admin/vaccine-infos/' + _id,
                 headers: {'Content-Type': 'application/json'},
                 data: vaccineSave
             })

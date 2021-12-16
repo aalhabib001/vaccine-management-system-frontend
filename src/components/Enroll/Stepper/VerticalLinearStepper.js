@@ -76,7 +76,7 @@ export default function VerticalLinearStepper() {
 
             await axios({
                 method: 'post',
-                url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/enroll/verify-nid?nid=' + enrollData.nid,
+                url: 'http://localhost:4200/api/vaccine/enroll/verify-nid?nid=' + enrollData.nid,
                 headers: {'Content-Type': 'application/json'}
             }).then(res => {
                 console.log(res.data)
@@ -113,7 +113,7 @@ export default function VerticalLinearStepper() {
 
             await axios({
                 method: 'post',
-                url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/enroll',
+                url: 'http://localhost:4200/api/vaccine/enroll',
                 headers: {'Content-Type': 'application/json'},
                 data: enrollData
             }).then(res => {

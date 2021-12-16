@@ -45,7 +45,7 @@ export default function VaccineCardStepper() {
 
             await axios({
                 method: 'post',
-                url: 'https://vaccine-ms-01.herokuapp.com/api/vaccine/vaccine-card',
+                url: 'http://localhost:4200/api/vaccine/vaccine-card',
                 headers: {'Content-Type': 'application/json'},
                 data: vaccineCardData
             }).then(res => {
